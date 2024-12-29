@@ -1,5 +1,5 @@
 '''
-PROBLEM STATEMENT : Number of nodes in the largest path between two leaf nodes.
+PROBLEM STATEMENT : The diameter of a binary tree is the number of nodes in the longest path between two leaf nodes.
 '''
 
 class BST:
@@ -24,29 +24,29 @@ class BST:
             else:
                 self.rchild = BST(data)
 
-    def height(self):
-        if self is None or self.val is None:
-            return 0
-        lh = self.lchild.height() if self.lchild else 0
-        rh = self.rchild.height() if self.rchild else 0
-        return 1 + max(lh, rh)
 
-    def diameter(self):
-        result = [0]
-        if self.val == None:
-            return 0
-        
-        lh = self.lchild.height() if self.lchild else 0
-        rh = self.rchild.height() if self.rchild else 0
-        result[0] = max(result[0],lh+rh)
-        return 1+max(lh,rh)
-
+    '''
+    Calculate Heights: For each node, you calculate the height of its left and right subtrees.
+    Update Diameter: The diameter is the sum of the heights of the left and right subtrees. This diameter is updated at each node.
+    Return Height and Diameter: At each node, the height is calculated as 1 + max(left_height, right_height), and the updated diameter is passed up the tree.
+    '''
+    def calculate_diameter(self):
+        def calculate_height(node, diameter):
+            if node is None:
+                return 0, diameter
+            lh, diameter = calculate_height(node.lchild, diameter)
+            rh, diameter = calculate_height(node.rchild, diameter)
+            diameter = max(diameter, lh + rh)
+            return 1 + max(lh, rh), diameter
+        # Start with diameter as 0
+        _, diameter = calculate_height(self, 0)
+        return diameter
 
 
 # Example usage
 root = BST(None)
-nums = [1,2,3,4,5]
+nums =[10,5,15,2,7,12,20]
 for num in nums:
     root.insert_node(num)
 
-print(f"Diameter of the tree is: {root.diameter()}")
+print(f"Diameter of the tree is: {root.calculate_diameter()}")

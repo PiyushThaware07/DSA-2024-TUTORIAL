@@ -4,43 +4,21 @@ class BST:
         self.lchild = None
         self.rchild = None
 
-
-    def levelOrder2(self):
-        root = self
-        queue = [root]
-        result = []
-        while len(queue) != 0:
-            element = queue.pop(0)
-            result.append(element.val)
-            if element.lchild:
-                print("left -> ",element.lchild.val)
-                queue.append(element.lchild)
-            if element.rchild:
-                print("right -> ",element.rchild.val)
-                queue.append(element.rchild)
-        # print(result)
-
-    def isSymmetric(self,root1,root2):
-        if root1 is None and root2 is None:
-            return True
-        
-        if root1 is None or root2 is None:
-            return False
-    
-        
-        return ( root1.val == root2.val and self.isSymmetric(root1.lchild,root2.rchild) and self.isSymmetric(root1.rchild,root2.lchild))
-
     def symmetric_tree(self):
-        if self is None:
-            print("BT is empty")
+        def isSymmetric(root1,root2):
+            if root1 is None and root2 is None:
+                return True
+            if root1 is None or root2 is None:
+                return False
+            return ( root1.val == root2.val and isSymmetric(root1.lchild,root2.rchild) and isSymmetric(root1.rchild,root2.lchild))
+        # Initialization
+        if self.val is None:
+            print(f"BST is empty!")
             return
         else:
-            value = self.isSymmetric(self.lchild,self.rchild)
-            print(value)
+            result = isSymmetric(self.lchild,self.rchild)
+            print(result)
             return
-
-
-
 
 
 

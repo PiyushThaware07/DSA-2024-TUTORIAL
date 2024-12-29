@@ -52,9 +52,7 @@ class BST:
                     if levelNode[i - 1] <= levelNode[i]:
                         print(f"Validation failed at odd level {height}: {levelNode} is not strictly decreasing.")
                         return False
-            
             height += 1
-        
         print("Tree satisfies even-odd tree conditions.")
         return True
 

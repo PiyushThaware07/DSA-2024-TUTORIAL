@@ -29,7 +29,7 @@ print(root.lchild,root.key,root.rchild)
 print(root.lchild.lchild,root.lchild.key,root.lchild.rchild)
 
 
-# Creating Right Child
+# Creating Right Child      
 root.rchild = CreateNode(150)
 print(root.lchild,root.key,root.rchild)
 print(root.rchild.lchild,root.rchild.key,root.rchild.rchild)

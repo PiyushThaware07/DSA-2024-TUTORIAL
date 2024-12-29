@@ -1,6 +1,3 @@
-from math import e
-
-
 class BST:
     def __init__(self, val):
         self.val = val
@@ -8,59 +5,35 @@ class BST:
         self.rchild = None
 
 
-    def levelOrder2(self):
-        root = self
-        queue = [root]
-        result = []
-        while len(queue) != 0:
-            element = queue.pop(0)
-            result.append(element.val)
-            if element.lchild:
-                print("left -> ",element.lchild.val)
-                queue.append(element.lchild)
-            if element.rchild:
-                print("right -> ",element.rchild.val)
-                queue.append(element.rchild)
-        # print(result)
-
-    def method01(self):
-        if self is None:
-            return [] # Return an empty list if the root is None
-        
+    def zigzag(self):
         queue = [self]
         result = []
-        direction = False # False means left -> right, True means right -> left
-        while len(queue) != 0:
-            level_size = len(queue)
-            current_level = []
-            for _ in range(level_size):
-                node = queue.pop(0)
-                current_level.append(node.val)
-                
-                 # Append the children of the current node to the queue
-                if node.lchild:
-                    queue.append(node.lchild)
-                if node.rchild:
-                    queue.append(node.rchild)
-            
-            # Reverse the current level's order based on the direction
-            if direction:
-                result.append(current_level[::-1]) # Reverse the level for zigzag
+        height = 0
+        while queue:
+            levelSize = len(queue)
+            levelNode = []
+            for _ in range(levelSize):
+                currentNode = queue.pop(0)
+                levelNode.append(currentNode.val)
+                if currentNode.lchild is not None:
+                    queue.append(currentNode.lchild)
+                if currentNode.rchild is not None:
+                    queue.append(currentNode.rchild)
+            if height % 2 == 0:
+                result.append(levelNode)
             else:
-                result.append(current_level[::])
-            
-            # Flip the direction for the next level
-            direction = not direction
+                ReversedlevelNode = levelNode[::-1]
+                result.append(ReversedlevelNode)
+            height += 1
         print(result)
             
 
 
-
-
-
-root = BST(1)
-root.lchild = BST(2)
-root.rchild = BST(3)
-root.rchild.lchild = BST(4)
-root.rchild.rchild = BST(5)
-root.method01()
+root = BST(10)
+root.lchild = BST(5)
+root.lchild.lchild = BST(2)
+root.lchild.rchild = BST(7)
+root.rchild = BST(15)
+root.rchild.lchild = BST(12)
+root.rchild.rchild = BST(20)
+root.zigzag()

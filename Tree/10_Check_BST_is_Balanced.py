@@ -1,3 +1,6 @@
+'''
+Condition For Balanced Binary Tree : For every node in the tree, the absolute difference in the heights of the left and right subtrees must not exceed 1
+'''
 class BST:
     def __init__(self,val):
         self.val = val
@@ -22,6 +25,7 @@ class BST:
         
     
     def find_depth(self):
+        # handle edge case if tree is empty
         if self.val is None:
             return 0
 
