@@ -1,3 +1,14 @@
+'''
+Problem Statement : Merging two sorted linked lists means combining them into a single linked list that is also sorted.
+
+# Input
+100 -> 200 -> 300
+200 -> 400 -> 600
+
+# Output 
+100 -> 200 -> 200 -> 300 -> 400 -> 600
+'''
+
 from custom.linkedlist import LinkedList,CreateNode
 
 class Solution:
