@@ -2,7 +2,7 @@
 Remove Dublicates From Linked List
 '''
 
-from custom.linkedlist import CreateNode, LinkedList
+from custom.linkedlist import  LinkedList
 
 class Solution:
     def optimize(self,myList):
@@ -20,6 +20,7 @@ class Solution:
 
 
 ll1 = LinkedList()
+ll1.addEnd(1)
 ll1.addEnd(1)
 ll1.addEnd(1)
 ll1.addEnd(2)
