@@ -1,6 +1,21 @@
 from custom.linkedlist import LinkedList
 
 class Solution:
+    def createCycle(self,myList,target):
+        current = myList.head
+        length = 1
+        while current.next is not None:
+            current = current.next
+            length += 1
+        if target > length:
+            print(f"Target exceeds the length of the linked list ({length}).")
+            return
+        target_node = myList.head
+        for _ in range(target - 1):
+            target_node = target_node.next
+        current.next = target_node
+    
+    
     def better(self, myList):
         # Initialize a hashMap to store nodes and their first occurrence position
         hashMap = {}
@@ -37,14 +52,16 @@ class Solution:
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-            if slow == fast:    # Cycle
+            if slow == fast:
                 length = 0
-                while slow != fast:
+                while True:
                     length += 1
-                    fast = fast.next
-                print(length)
+                    slow = slow.next
+                    if slow == fast:
+                        break
+                print(f"Length of cycle is : {length}")
                 return
-        print("No Cycle")
+        print("No cycle Found")
         return
     
     
@@ -55,15 +72,8 @@ myList.addEnd(103)
 myList.addEnd(104)
 myList.addEnd(105)
 
-# Create a cycle manually by linking the last node to the node with data 103
-current = myList.head
-cycle_start = None
-while current.next:
-    if current.data == 104:
-        cycle_start = current  # Identify the node where the cycle starts
-    current = current.next
-current.next = cycle_start  # Creating the cycle by connecting the last node to node 103
-
 # Detect the cycle and find the cycle length (if any)
 sol = Solution()
+sol.createCycle(myList,2)
 sol.better(myList)
+sol.optimize(myList)

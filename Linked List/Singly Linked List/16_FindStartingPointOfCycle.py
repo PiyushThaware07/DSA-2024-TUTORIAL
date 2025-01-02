@@ -8,6 +8,20 @@ If there is no cycle in the linked list return null.
 from custom.linkedlist import LinkedList
 
 class Solution:
+    def create_cycle(self,myList,target):
+        current = myList.head
+        length = 1
+        while current.next is not None:
+            current = current.next
+            length += 1
+        if target > length:
+            print(f"Target exceeds the length of the linked list ({length}).")
+            return
+        target_node = myList.head
+        for _ in range(target - 1):
+            target_node = target_node.next
+        current.next = target_node
+    
     def better(self, myList):
         head = myList.head
         hashMap = {}
@@ -49,16 +63,8 @@ myList.addEnd(102)
 myList.addEnd(103)
 myList.addEnd(104)
 myList.addEnd(105)
+myList.addEnd(106)
 
-# Detect the cycle and find the start of the cycle
 sol = Solution()
-
-# CREATE CYCLE (manually)
-current = myList.head
-cycle_start = None
-while current.next:
-    if current.data == 103:
-        cycle_start = current  # Node where cycle starts
-    current = current.next
-current.next = cycle_start
+sol.create_cycle(myList,4)
 sol.optimize(myList)

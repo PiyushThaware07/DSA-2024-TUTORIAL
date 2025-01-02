@@ -1,6 +1,21 @@
 from custom.linkedlist import CreateNode, LinkedList
 
 class Solution:
+    def create_cycle(self,myList,position):
+        tail = myList.head
+        while tail.next is not None:
+            tail = tail.next
+        current = myList.head
+        for _ in range(position-1):
+            if current is None:
+                return f"Position {position} is out of bounds. Cannot create a cycle."
+            current = current.next
+        if current is None:
+            return f"Position {position} is out of bounds. Cannot create a cycle."
+        tail.next = current
+        return f"Cycle created: Tail node now points to node with value {current.data}."
+        
+        
     def hasCycle(self,myList):
         head = myList.head
         slow = head
@@ -24,4 +39,5 @@ ll1.addEnd(5)
 ll1.traversal()
 
 s = Solution()
+s.create_cycle(ll1,3)
 s.hasCycle(ll1)

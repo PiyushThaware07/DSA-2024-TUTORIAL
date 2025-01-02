@@ -13,11 +13,12 @@ from custom.linkedlist import LinkedList
 class Solution:
     def RemoveElements(self,myList,val):
         head = myList.head
+        # Handle cases where the head itself contains the value to be removed
         while head and head.data == val:
             head = head.next
             
+        # Remove elements in the rest of the list
         current = head
-        # But it will check form the item-2 of a linked list but what about the first index element of linked list for that we have above code
         while current and current.next:
             if current.next.data == val:
                 current.next = current.next.next
