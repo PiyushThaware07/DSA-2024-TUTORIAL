@@ -2,22 +2,19 @@
 
 class Solution:
     def BFS_Traversal(self,graph,start):
-        visited = set()                      # To keep track of visited nodes
-        queue = [(start,-1)]                 # Initialize queue with the starting node and its parent (-1 indicates no parent)
+        queue = [(start,-1)]                                        # Initialize queue with the starting node and its parent (-1 indicates no parent)
+        visited = {node:False for node in graph}                    # To keep track of visited nodes
         
         # Perform BFS
         while queue:
-            vertice,parent = queue.pop()     # Dequeue the next node and its parent
-            if vertice in visited:           # If the current node is already visited, a cycle is detected
+            node,parent = queue.pop(0)                              # Dequeue the next node and its parent
+            if visited[node]:                                       # If the current node is already visited, a cycle is detected
                 return True
-            visited.add(vertice)             # Mark the node as visited
-            
-            # Add unvisited neighbors to the queue
-            for neighbor in graph[vertice]:
-                # Ignore the node that is the parent (avoid backtracking to the parent)
-                if neighbor != parent:
-                    queue.append((neighbor,vertice)) # Enqueue the neighbor with its parent
-        return False # Return False if no cycle is found
+            visited[node] = True                                    # Mark the node as visited
+            for neighbor in graph[node]:                            # Add unvisited neighbors to the queue
+                if neighbor != parent:                              # Ignore the node that is the parent (avoid backtracking to the parent)
+                    queue.append((neighbor,node))                   # Enqueue the neighbor with its parent  
+        return False
 
 
 
