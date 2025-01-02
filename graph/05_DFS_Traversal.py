@@ -41,7 +41,7 @@ class Graph:
                 self.DFS_Recursive(neighbor, visited)
             print()
     
-    def DFS_Iterative(self,initialNode):
+    def DFS_Iterative(self,start):
         """
         Performs Depth-First Search (DFS) traversal starting from a vertex.
         1. Consider starting node as current node and visit that node.
@@ -49,19 +49,18 @@ class Graph:
         3. follow step 2 util we reach dead end.
         4. if unviisted nodes are present in the graph then back trach take recent visited node as current node repeat setp 2.
         """
-        visited = set()
-        if initialNode not in self.graph:
-            print(f"{initialNode} node not present in graph!")
-            return
-        stack = []
-        stack.append(initialNode)
+        if start not in self.graph:
+            return f"{start} vertice not present!"
+        stack = [start]
+        visited = {node: False for node in self.graph}
         while stack:
-            current = stack.pop()
-            if current not in visited:
-                print(current,end=" ")
-                visited.add(current)
-                for neighbor in self.graph[current]:
-                    stack.append(neighbor)
+            currentNode = stack.pop()
+            if not visited[currentNode]:
+                print(currentNode, end=" ")
+                visited[currentNode] = True
+                for neighbor in self.graph[currentNode]:
+                    if not visited[neighbor]:
+                        stack.append(neighbor)
         
             
             

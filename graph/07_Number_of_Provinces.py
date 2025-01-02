@@ -2,20 +2,24 @@ from common.graph import Graph
 
 
 class Solution:
-    def dfs_traversal(self,node,visited,graph):
-        if node not in visited:
-            visited.add(node)
-            for neighbor in graph[node]:
-                self.dfs_traversal(neighbor,visited,graph)
-    
     def noOfProvinces(self,graph):
+        def dfs(node,visited):
+            stack = [node]
+            while stack:
+                current = stack.pop()
+                if not visited[current]:
+                    visited[current] = True
+                    for neighbor in graph[current]:
+                        if not visited[neighbor]:
+                            stack.append(neighbor)
+        
+        visited = {node:False for node in graph}
         count = 0
-        visited = set()
         for node in graph:
-            if node not in visited:
+            if not visited[node]:
                 count += 1
-                self.dfs_traversal(node,visited,graph)
-        print("Total Number Of Provinces ---> ",count)
+                dfs(node,visited)
+        print(count)
             
 
 

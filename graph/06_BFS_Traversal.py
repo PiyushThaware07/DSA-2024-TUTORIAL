@@ -2,15 +2,18 @@ from common.graph import Graph
 
 class Solution:
     def BFS_Traversal(self,start,graph):
-        visited = set()
+        if start not in graph:
+            return f"{start} vertice not present!"
         queue = [start]
+        visited = {node: False for node in graph}
         while queue:
-            vertice = queue.pop(0)
-            print(vertice,end=" ")
-            visited.add(vertice)
-            for neighbor in graph[vertice]:
-                if neighbor not in visited and neighbor not in queue:
-                    queue.append(neighbor)
+            currentNode = queue.pop(0)
+            if not visited[currentNode]:
+                print(currentNode, end=" ")
+                visited[currentNode] = True
+                for neighbor in graph[currentNode]:
+                    if not visited[neighbor]:
+                        queue.append(neighbor)
                 
 
 g = Graph()

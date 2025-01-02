@@ -1,3 +1,14 @@
+'''
+Problem Statement: Rotten Oranges (Oranges Rotting Problem)
+
+You are given a grid representing a box of oranges. Each cell in the grid can have one of three values:
+    0: The cell is empty.
+    1: The cell contains a fresh orange.
+    2: The cell contains a rotten orange.
+Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+Your task is to determine the minimum time required to rot all fresh oranges. If it is impossible to rot all the oranges, return -1.
+'''
+
 class Solution:
     def __init__(self, graph):
         self.graph = graph
