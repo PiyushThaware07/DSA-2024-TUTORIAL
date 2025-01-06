@@ -24,29 +24,20 @@ class BST:
                 self.rchild = BST(data)
         
     
-    def find_depth(self):
-        # handle edge case if tree is empty
-        if self.val is None:
-            return 0
-
-        lh = 0
-        rh = 0
-        if self.lchild is not None:
-            lh = self.lchild.find_depth()
+    def isBalanced(self):
+        def findDepth(node):
+            if node is None:
+                return 0
+            lh = findDepth(node.lchild)
             if lh == -1:
                 return -1
-
-        if self.rchild is not None:
-            rh = self.rchild.find_depth()
+            rh = findDepth(node.rchild)
             if rh == -1:
                 return -1
-        
-        if(abs(lh-rh)>1):   # abs(-10) ==> 10
-            return -1
-        return 1 + max(lh,rh)
-    
-    def isBalanced(self):
-        if self.find_depth() == -1:
+            if abs(lh - rh) > 1:
+                return -1
+            return 1 + max(lh, rh)
+        if findDepth(self) == -1:
             print("Unbalanced")
         else:
             print("Balanced")

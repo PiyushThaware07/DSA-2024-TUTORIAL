@@ -1,17 +1,19 @@
-# Select an element from unsorted array and placed it into the sorted array.
+'''
+Problem Statement : Insertion Sort 
 
-def sort(arr):
-    size = len(arr)
-    for i in range(1,size):
-        temp = arr[i]
-        previous = i-1
-        while (previous>=0 and arr[previous]>temp):
-            arr[previous+1] = arr[previous]
-            previous = previous-1
-        arr[previous+1] = temp
-    print("Sorted Array : ",arr)
-        
+Problem Solution : Select an element from unsorted array and placed it into the sorted array.
+Complexity : 
+    Time Complexity : O(n^2)
+    Space Complexity : O(1)
+'''
 
-array = [13,46,24,52,20,9]
-print("Unsorted Array :",array )
-sort(array)
+nums = [8,4,1,5,9,2]
+n = len(nums)
+for index in range(1,n):
+    num = nums[index]
+    prev = index - 1
+    while prev >= 0 and nums[prev] > num:
+        nums[prev+1] = nums[prev]
+        prev -= 1
+    nums[prev+1] = num
+print(nums)
