@@ -1,18 +1,19 @@
-'''
-Remove Dublicates From Linked List
-'''
-
 from custom.linkedlist import  LinkedList
 
 class Solution:
     def optimize(self,myList):
-        head = myList.head
-        current = head
-        while current and current.next:
-            if current.data == current.next.data:
-                current.next = current.next.next 
+        seen = set()
+        current = myList.head
+        previous = None
+        while current.next:
+            if current.data not in seen:
+                # Add to seen and move previous
+                seen.add(current.data)
+                previous = current
             else:
-                current = current.next
+                # Remove the current node
+                previous.next = current.next
+            current = current.next
         myList.traversal()
 
             
@@ -22,8 +23,9 @@ class Solution:
 ll1 = LinkedList()
 ll1.addEnd(1)
 ll1.addEnd(1)
-ll1.addEnd(1)
 ll1.addEnd(2)
+ll1.addEnd(1)
+ll1.addEnd(3)
 ll1.traversal()
 
 s = Solution()

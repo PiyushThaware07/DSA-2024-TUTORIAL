@@ -11,19 +11,19 @@ class Solution:
     def swapPairs(self,myList):
         head = myList.head
         dummy = CreateNode(-1)
-        dummy.next = head     # 0 -> 1 -> 2 -> 3 -> 4 -> None
-        current = dummy 
+        dummy.next = head
+        current = dummy
         while current.next and current.next.next:
-            first = current.next 
-            second = current.next.next 
-
-            first.next = second.next 
-            second.next = first 
+            first = current.next
+            second = current.next.next
+            
+            first.next = second.next
+            second.next = first
             current.next = second
-            current = first 
-        myList.head = dummy.next 
+            current = first
+            
+        myList.head = dummy.next
         myList.traversal()
-
 
 
                 
@@ -37,7 +37,5 @@ ll1.addEnd(1)
 ll1.addEnd(2)
 ll1.addEnd(3)
 ll1.addEnd(4)
-ll1.traversal()
-
 s = Solution()
 s.swapPairs(ll1)
