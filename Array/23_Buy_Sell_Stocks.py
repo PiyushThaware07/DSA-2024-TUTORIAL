@@ -63,3 +63,17 @@ s.brute(prices)
 s.better(prices)
 s.optimal(prices)
 
+
+'''
+nums = [7,1,6,4,3,1]
+minDay = 0
+for index in range(1,len(nums)):
+    if nums[index] < nums[minDay]:
+        minDay = index
+maxProfit = 0
+for index in range(minDay,len(nums)):
+    if nums[index] > minDay:
+        profit = nums[index] - minDay
+        maxProfit = max(maxProfit,profit)
+print(maxProfit)
+'''

@@ -27,7 +27,20 @@ class Solution:
                     longest = max(longest,j-i+1)
                     break
         print(longest)
-
+        
+    def optimize(self,arr,k):
+        prefix_sum = {0:-1}
+        current_sum = 0
+        longest = 0
+        for index in range(len(arr)):
+            current_sum += arr[index]
+            # Check if a valid subarray sum exists before inserting
+            if current_sum - k in prefix_sum:
+                longest = max(longest,index-prefix_sum[current_sum - k])
+            # Store the first occurrence of current_sum to maximize subarray length
+            if current_sum not in prefix_sum:
+                prefix_sum[current_sum] = index
+        print(longest)
 
 
 
@@ -35,3 +48,4 @@ numbers = [1,2,3,1,1,1,1,2,3]
 s = Solution()
 s.brute(numbers,3)
 s.better(numbers,3)
+s.optimize(numbers,3)

@@ -9,23 +9,23 @@ class Solution:
         print(arr)
 
     def optimal(self,arr):
-        zeros = 0
-        onces = 0
-        twos = len(arr)-1
-        while (onces<=twos):
-            if arr[onces] == 0:
-                temp = arr[zeros]
-                arr[zeros] = arr[onces]
-                arr[onces] = temp 
-                zeros = zeros + 1
-                onces = onces + 1
-            elif arr[onces] == 2:
-                temp = arr[onces]
-                arr[onces] = arr[twos]
-                arr[twos] = temp
-                twos = twos - 1
+        left = 0
+        middle = 0
+        right = len(arr)-1
+        while (middle<=right):
+            if arr[middle] == 0:
+                temp = arr[left]
+                arr[left] = arr[middle]
+                arr[middle] = temp 
+                left = left + 1
+                middle = middle + 1
+            elif arr[middle] == 2:
+                temp = arr[middle]
+                arr[middle] = arr[right]
+                arr[right] = temp
+                right = right - 1
             else:
-                onces = onces + 1
+                middle = middle + 1
         print(arr)
 
 nums = [2,0,2,1,1,0]
