@@ -32,7 +32,7 @@ class Solution:
 
 
 numbers = [16,17,4,3,5,2]
-numbers = [10,4,2,4,1]
+# numbers = [10,4,2,4,1]
 s = Solution()
 # s.brute(numbers)
 s.optimal(numbers)

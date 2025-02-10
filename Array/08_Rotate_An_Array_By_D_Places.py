@@ -46,3 +46,23 @@ nums = [10, 20, 30, 40, 50, 60]
 
 print("Left Rotated by 2 places:", sol.leftRotateArrayByDPlaces(nums, 2))
 print("Right Rotated by 2 places:", sol.rightRotateArrayByDPlaces(nums, 2))
+
+
+
+
+'''
+# RIGHT ROTATE BY N Elements --------------------------------------------------------------
+nums = [1,2,3,4,5]
+n = len(nums)
+def reverse(low,high,nums):
+    while low<=high:
+        nums[low],nums[high]=nums[high],nums[low]
+        low += 1
+        high -= 1
+k = 2
+reverse(0,k,nums)
+reverse(k+1,n-1,nums)
+reverse(0,n-1,nums)
+print(nums)     
+-------------------------------------------------------------------------------------------   
+'''
