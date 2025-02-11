@@ -23,14 +23,14 @@ Explanation: There are no elements to the right of index 0.
 class Solution:
     def brute(self,arr):
         n = len(arr)
+        result = []
         for i in range(0,n):
-            largest = 0
+            maximum = -1
             for j in range(i+1,n):
-                if arr[j] > largest:
-                    largest = arr[j]
-                    arr[i] = largest
-        arr[n-1] = -1
-        print(arr)
+                maximum = max(maximum,arr[j])
+            result.append(maximum)
+        print(result)
+            
     
     def optimal(self,arr):
         n = len(arr)
@@ -44,6 +44,7 @@ class Solution:
 
 numbers = [17,18,5,4,6,1]
 # numbers = [400]
+# numbers = [16,17,4,3,5,2]
 s = Solution()
-# s.brute(numbers) 
+s.brute(numbers)
 s.optimal(numbers)

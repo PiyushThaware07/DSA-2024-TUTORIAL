@@ -1,5 +1,3 @@
-import numpy as np
-
 class Solution:
     def generate(self,arr,index,current,result):
         if index >= len(arr):        # Base Case

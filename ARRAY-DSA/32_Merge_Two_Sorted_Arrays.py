@@ -44,6 +44,25 @@ class Solution:
         results.sort()
         print(results)
         
+    def optimize(self,nums1,nums2):
+        p1 = 0
+        p2 = 0
+        result = []
+        while p1 < len(nums1) and p2 < len(nums2):
+            if nums1[p1]<nums2[p2]:
+                result.append(nums1[p1])
+                p1 += 1
+            else:
+                result.append(nums2[p2])
+                p2 += 1
+        while p1 < len(nums1):
+            result.append(nums1[p1])
+            p1 += 1
+        while p2 < len(nums1):
+            result.append(nums2[p2])
+            p2 += 1
+        print(result)
+        
         
 
 
@@ -52,3 +71,4 @@ arr2 = [2,5,6]
 s = Solution()
 s.brute(arr1,3,arr2,3)
 s.better(arr1,3,arr2,3)
+s.optimize(arr1,arr2)

@@ -17,24 +17,13 @@ class Solution:
         n = len(arr)
         count = 0
         for i in range(0,n):
+            submission = 0
             for j in range(i,n):
-                currentSum = 0
-                for m in range(i,j+1):
-                    currentSum = currentSum + arr[m]
-                if currentSum == k:
-                        count = count + 1
+                submission += arr[j]
+                if submission == k:
+                    count += 1
         print(count)
 
-    def better(self,arr,k):
-        n = len(arr)
-        count = 0
-        for i in range(0,n):
-            currentSum = 0
-            for j in range(i,n):
-                currentSum = currentSum + arr[j]
-                if currentSum == k:
-                    count = count + 1
-        print(count)
 
     def optimal(self,arr,k):
         n = len(arr)
@@ -44,13 +33,12 @@ class Solution:
         hashMap[0]=1
         for i in range(0,n):
             prevSum = prevSum + arr[i]
-            check = prevSum - k 
             # If check is in hashMap, add its count to counter
-            if check in hashMap:
-                counter = counter + hashMap[check]
+            if prevSum - k  in hashMap:
+                counter += hashMap[prevSum - k ]
             # update hashMap
             if prevSum in hashMap:
-                hashMap[prevSum] = hashMap[prevSum] + 1
+                hashMap[prevSum] += 1
             else:
                 hashMap[prevSum] = 1
         print(counter)
@@ -58,10 +46,9 @@ class Solution:
 
 
 
-numbers = [1,1,1]
-numbers = [1,2,3]
+# numbers = [1,1,1]
+# numbers = [1,2,3]
 numbers = [1,2,3,-3,1,1,1,4,2,-3]
 s = Solution()
 s.brute(numbers,3)
-s.better(numbers,3)
 s.optimal(numbers,3)

@@ -1,19 +1,14 @@
-class Solution:
-    def brute(self, arr):
-        n = len(arr)
-        result = []
-        for i in range(0, n):  # Outer loop to check each element
-            leader = arr[i]
-            for j in range(i + 1, n):  # Inner loop to compare with all elements to the right
-                if arr[j] > leader:  # If any element to the right is greater, break
-                    break
-                else:
-                    result.append(leader)  # Add the leader to the result
-                    break
-        result.append(arr[n - 1])  # Last element is always a leader
-        print(result)
+'''
+Array Leader : An array leader is an element in an array that is greater than all the elements to its right. The last element of the array is always a leader because there are no elements to its right.
 
-    
+steps :
+1. start iteration from the end of the array.
+2. and keep a maximum that continuously track the maximum element from the right side element.
+3. now suppose you are at n-1 and your maximum is at 0 then you will compare both and if you found the last element is greater than the maximum then just simply insert the element into the result and update you maximum as well.
+4. do same for the remaining element of left side.
+'''
+
+class Solution:
     def optimal(self, arr):
         n = len(arr)
         maximum = 0
@@ -34,5 +29,4 @@ class Solution:
 numbers = [16,17,4,3,5,2]
 # numbers = [10,4,2,4,1]
 s = Solution()
-# s.brute(numbers)
 s.optimal(numbers)

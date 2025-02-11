@@ -19,22 +19,20 @@ class Solution:
                         # Sort the triplet to handle duplicates
                         triplet = tuple(sorted([nums[i], nums[j], nums[k]]))
                         results.add(triplet)
-        
         # Convert the set of tuples to a list of lists
         return [list(triplet) for triplet in results]
 
     def better(self,nums):
         n = len(nums)
         result = set()
-
         for i in range(0,n):
             hashMap = set()
             for j in range(i+1,n):
-                k = -(nums[i]+nums[j])
-                if k in hashMap:
+                k = -(nums[i]+nums[j]) # Target third element
+                if k in hashMap:       # Check if the third element exists
                     temp = [nums[i],nums[j],k]
                     temp.sort()
-                    result.add(tuple(temp))
+                    result.add(tuple(temp))   # Store unique triplets
                 hashMap.add(nums[j])
         return [list(item) for item in result]
 
