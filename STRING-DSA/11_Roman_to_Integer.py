@@ -56,3 +56,4 @@ string = "MCMXCIV"
 # string = "III"
 s = Solution()
 s.optimal(string)
+s.optimal("LVIII")

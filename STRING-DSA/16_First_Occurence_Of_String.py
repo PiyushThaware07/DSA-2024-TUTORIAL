@@ -24,6 +24,6 @@ class Solution:
 
 
 string = "sadbutsad"
-found = "sadd"
+found = "sad"
 s = Solution()
 s.optimize(string,found)

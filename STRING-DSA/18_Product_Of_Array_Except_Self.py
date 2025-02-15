@@ -4,7 +4,7 @@ Product of Array Except Self
 Input: nums = [1,2,3,4]
 Output: [24,12,8,6]
 '''
-
+import math
 class Solution:
     def brute(self,nums):
         n = len(nums)
@@ -30,22 +30,26 @@ class Solution:
             # suffix[1] = suffix[1+1] * nums[1+1]
             # suffix[2] = 4           * 3 => 12
             # suffix = [0,12,4,1]
-
-
-        print(prefix)
-        print(suffix)
-
         result = [0]*n
         for i in range(len(prefix)):
             result[i] = prefix[i] * suffix[i]
         print(result)
-
+        
+    
+    def optimize(self,nums):
+        result = []
+        for index in range(len(nums)):
+            prefixMultiply = math.prod(nums[:index]) if nums[:index] else 1
+            suffixMultiply = math.prod(nums[index+1:]) if nums[index+1:] else 1
+            result.append(prefixMultiply * suffixMultiply)
+        print(result)
         
         
 
 
 
 nums = [1,2,3,4]
-# nums = [-1,1,0,-3,3]
+nums = [-1,1,0,-3,3]
 s = Solution()
 s.brute(nums)
+s.optimize(nums)
