@@ -23,6 +23,11 @@ class LinkedList:
         self.head = new_node     
 
 
+
+    '''
+    Time Complexity : O(n)
+    Space Complexity : O(1)
+    '''
     def reverse(self):
         current = self.head
         previous = None

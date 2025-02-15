@@ -61,7 +61,7 @@ class Solution:
 
 
 
-s = "badc"
-t = "baba"
+s = "egg"
+t = "add"
 sol = Solution()
 sol.optimized(s,t)

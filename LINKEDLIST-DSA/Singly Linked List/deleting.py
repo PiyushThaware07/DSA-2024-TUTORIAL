@@ -30,12 +30,21 @@ class LinkedList:
                 current = current.ref
             print("None")  
     
+    
+    '''
+    Time Complexity  : O(1)
+    Space Complexity : O(1)
+    '''
     def deleteBegin(self):
         if self.head is None:
             print("Linked List is empty")
         else:
             self.head = self.head.ref
     
+    '''
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
+    '''
     def deleteEnd(self):
         if self.head is None:
             print("Linked List is empty")
@@ -47,6 +56,11 @@ class LinkedList:
                 current = current.ref
             current.ref = None
     
+    
+    '''
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
+    '''
     def deleteByValue(self,position):
         if self.head is None:
             print("Linked List is empty")

@@ -28,6 +28,6 @@ class Solution:
             print("Odd no not present")
                 
 
-mystring = "52"
+mystring = "3542746"
 s = Solution()
 s.optimized(mystring)

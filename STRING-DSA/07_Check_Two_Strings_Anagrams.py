@@ -1,5 +1,6 @@
 '''
 Check two strings are anagram or not
+note : An anagram is a word or phrase formed by rearranging the letters of another word or phrase, using all the original letters exactly once.
 
 string1 = "silent"
 string2 = "listen" 
@@ -42,33 +43,25 @@ class Solution:
            else : do nothing
         4. check again entire hashmap if any of hashmap has more than or less than 0 hash count then this is not a anagrams
         '''
-        # single hash method
-        n1 = len(string1)
-        n2 = len(string2)
-        if n1 != n2:
-            print("Length of string not matches")
+        if len(string1) != len(string2):
+            print("Not Anagrams")
             return
-        # hash map characters
         hashMap = {}
-        for i in range(0,n1):
-            if string1[i] in hashMap:
-                hashMap[string1[i]] = hashMap.get(string1[i]) + 1
+        for char in string1:
+            if char not in hashMap:
+                hashMap[char] = 1
             else:
-                hashMap[string1[i]] = 1
-        # print(hashMap)
-
-        for i in range(0,n2):
-            if string2[i] in hashMap:
-                hashMap[string2[i]] = hashMap.get(string2[i]) - 1
-        # print(hashMap)
-
-        for i in range(0,n1):
-            count =  hashMap[string1[i]]
-            if count != 0:
-                print("I am not anagram")
-                break
+                hashMap[char] += 1
+        for char in string2:
+            if char in hashMap:
+                hashMap[char] -= 1
+        for key in hashMap:
+            if hashMap[key] != 0:
+                print("not anagrams")
+                return
         else:
-            print("I am anagram")
+            print("anagrams")
+            return
 
 
 

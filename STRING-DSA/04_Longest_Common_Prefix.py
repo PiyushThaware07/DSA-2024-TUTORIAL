@@ -16,22 +16,18 @@ Explanation: There is no common prefix among the input strings.
 
 class Solution:
     def brute(self,words):
-        # if words is empty
-        if not words:
-            print("Empty")
-
-        prefix = words[0]
+        temp = words[0]
         for i in range(1,len(words)):
-            word = words[i] 
-            i = 0
-            while i<len(prefix) and i<len(word) and prefix[i] == word[i]:
-                i = i+1
-            prefix = prefix[0:i]
+            word = words[i]
+            wordLength = min(len(word),len(temp))
+            for j in range(wordLength):
+                if word[j] != temp[j]:
+                    temp = temp[:j]
+                    break
+            temp = temp[:wordLength]
+        print(temp)
+            
 
-        if prefix == "":
-            print("There is no common prefix")
-        else:
-            print(prefix)
 
     def optimized(self,words):
         '''

@@ -24,12 +24,21 @@ class LinkedList:
                 n = n.ref
         print("\n")
     
+    
+    '''
+    Time Complexity  : O(1)
+    Space Complexity : O(1)
+    '''
     def insertBegin(self,data):
         new_node = Node(data)         # creating a node
         new_node.ref = self.head      # storing reference of head into the newly created node
         self.head = new_node          # add the reference of newly created node into the self.head
 
     
+    '''
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
+    '''
     def insertEnd(self,data):
         new_node = Node(data)        # creating a node
         n = self.head                
@@ -42,6 +51,10 @@ class LinkedList:
             n.ref = new_node         # change n.ref to newly create node
             
 
+    '''
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
+    '''
     def insertAfter(self,data,position):
             n = self.head
             while n is not None:          # traverse entire linked list till the head is not none
@@ -55,6 +68,11 @@ class LinkedList:
                 new_node.ref = n.ref          # new_node should store the address of next node which is currently stored by current node
                 n.ref = new_node              # current node should store the address of newly create node 
 
+
+    '''
+    Time Complexity  : O(n)
+    Space Complexity : O(1)
+    '''
     def insertBefore(self, data, position):
         if self.head is None:
             print("List is empty")

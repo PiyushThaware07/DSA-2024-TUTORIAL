@@ -61,6 +61,12 @@ class Solution:
         else:
             print("Not Matches")
             return
+    
+    def opimitzed2(self,string1,string2):
+        if len(string1)!=len(string2):
+            return False
+        return string2 in string1 + string1
+    
 
 
 
@@ -69,3 +75,4 @@ str2 = "bcdea"
 s = Solution()
 s.brute(str1, str2)
 s.optimized(str1, str2)
+print(s.opimitzed2(str1,str2))
