@@ -46,4 +46,4 @@ root2 = BST(1)
 root2.lchild = BST(2)
 root2.rchild = BST(3)
 root2.lchild.rchild = BST(5)
-print(root1.isSame(root2))  # Output: True
+print(root1.isSame(root2))
