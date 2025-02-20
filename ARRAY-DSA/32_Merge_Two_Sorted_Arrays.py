@@ -63,6 +63,11 @@ class Solution:
             p2 += 1
         print(result)
         
+    def optimize2(self,nums1,m,nums2,n):
+        nums1[m:] = nums2[:n]
+        nums1.sort()
+        print(nums1)
+        
         
 
 
@@ -71,4 +76,5 @@ arr2 = [2,5,6]
 s = Solution()
 s.brute(arr1,3,arr2,3)
 s.better(arr1,3,arr2,3)
-s.optimize(arr1,arr2)
+s.optimize2(arr1,3,arr2,3)
+# s.optimize(arr1,3,arr2,2)
