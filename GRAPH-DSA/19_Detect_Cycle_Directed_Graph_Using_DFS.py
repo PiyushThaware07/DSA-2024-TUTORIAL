@@ -9,51 +9,46 @@ Logic:
 * After visiting all neighbors, mark the node as no longer part of the recursion path.
 * Return False if no cycle is detected.
 '''
-
-from common.graph import Graph
-
 class Solution:
-    def dfs(self,node,visited,pathVisisted,graph):
+    def __init__(self):
+        self.graph = {
+            1 : [2],
+            2 : [3],
+            3 : [4,7],
+            4 : [5],
+            5 : [6],
+            6 : [],
+            7 : [5],
+            8 : [2,9],
+            9 : [10],
+            10 : [8]
+        }
+    
+    def dfs(self,node,visited,pathVisited):
         print('dfs for : ',node)
-        visited[node] = 1
-        pathVisisted[node] = 1
-        for neighbor in graph[node]:
-            if visited[neighbor] == 0:
-                if self.dfs(neighbor,visited,pathVisisted,graph):
-                    return True
-            elif pathVisisted[neighbor] == 1:
+        visited[node] = True
+        pathVisited[node] = True
+        for neighbor in self.graph[node]:
+            if not visited[neighbor]:
+                 if self.dfs(neighbor, visited, pathVisited):  
+                    return True 
+            elif visited[neighbor] and pathVisited[neighbor]:
                 return True
-        visited[node] = 0
+        pathVisited[node] = False
+        print("backtracking with : ",pathVisited)
         return False
     
-    def isCycle(self,graph):
-        visited = {node:0 for node in graph}
-        pathVisited = {node:0 for node in graph}
-        for node in graph:
-            if visited[node] == 0:
-                if self.dfs(node,visited,pathVisited,graph):
-                    print("Cycle found!")
-                    return True
-        print("Cycle not found!")
-        return False
-                    
-
-
-g = Graph()
-g.addVertice("A")
-g.addVertice("B")
-g.addVertice("C")
-g.addVertice("D")
-g.addVertice("E")
-g.addVertice("F")
-g.addVertice("G")
-g.addEdge("A","B","directed")
-g.addEdge("B","C","directed")
-g.addEdge("C","D","directed")
-g.addEdge("B","E","directed")
-g.addEdge("E","F","directed")
-g.addEdge("F","G","directed")
-g.addEdge("G","E","directed")
+    def detectCycle(self):
+        visited = {node:False for node in self.graph}
+        pathVisited = {node:False for node in self.graph}
+        for node in self.graph:
+            if not visited[node]:
+                if self.dfs(node, visited, pathVisited):  
+                    print("Found Cycle")
+                    return
+        else:
+            print("Cycle Not Found")
+            return
 
 sol = Solution()
-sol.isCycle(g.graph)
+sol.detectCycle()
