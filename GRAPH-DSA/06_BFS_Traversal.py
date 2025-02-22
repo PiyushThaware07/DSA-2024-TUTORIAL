@@ -8,7 +8,7 @@ class Solution:
             5 : [2, 4]
         }
         
-    def bfs_traversal(self,start):
+    def bfs_traversal_iterative(self,start):
         queue = [start]                               # Initialize the queue with the start node
         visited = {node:False for node in self.graph} # Track visited nodes
         while queue:
@@ -19,7 +19,28 @@ class Solution:
                 for neighbor in self.graph[current]:
                     if not visited[neighbor]:
                         queue.append(neighbor)
+    
+    def bfs_traversal_recursive(self):
+            def bfs(queue, visited):
+                if not queue:  # Base case: Stop when queue is empty
+                    return
+                node = queue.pop(0)
+                print(node, end=" ")
+
+                for neighbor in self.graph[node]:
+                    if not visited[neighbor]:
+                        visited[neighbor] = True
+                        queue.append(neighbor)
+                bfs(queue, visited)
+            visited = {node: False for node in self.graph}
+            for node in self.graph:
+                if not visited[node]:  # Handle disconnected graphs
+                    visited[node] = True
+                    bfs([node], visited)
+
             
         
 sol = Solution()
-sol.bfs_traversal(1)
+sol.bfs_traversal_iterative(1)
+print()
+sol.bfs_traversal_recursive()
