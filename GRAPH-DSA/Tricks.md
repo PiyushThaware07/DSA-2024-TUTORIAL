@@ -39,4 +39,12 @@ Topological sorting is used to order vertices in a **Directed Acyclic Graph (DAG
 - Computes **in-degree** (number of incoming edges) for all nodes.  
 - Nodes with **in-degree = 0** are added to a **queue**.  
 - Process queue: remove edges, update in-degree, and add new nodes with in-degree `0`.  
-- If all nodes are processed, return the order; otherwise, a **cycle exists**.  
+- If all nodes are processed, return the order; otherwise, a **cycle exists**. 
+
+---
+# Shortest Path 
+### 1. Using DFS
+- Topological Sort → Process nodes in the correct order using DFS.
+- Initialize Distances → Start with ∞, set source = 0.
+- Relaxation → Update shortest paths using stack order
+    - dist[v]=min(dist[v],dist[u]+weight(u,v))
