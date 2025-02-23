@@ -11,6 +11,10 @@ Example 01 :
 Example 02 : 
     Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
     Output: 4
+    
+    
+# ! Note : Kth Largest  : so always create a min heap.
+           Kth Smallest : so always create a max heap.
 '''
 
 

@@ -20,3 +20,20 @@ In a binary heap, nodes are stored in an array in level-order traversal (i.e., l
 1. Binary Heap
 2. Binomial Heap
 3. Fibonacci Heap
+
+### Pattern Identification :
+1. K
+2. Smallest / Largest
+
+### Implemented : 
+1. Kth largest / Smallest
+2. Marging K sorted list
+3. Top K frequent elements
+4. Sliding window problem
+5. Dijkstra’s Algorithm
+
+
+### Note : Since heap have internal sorting and usually we can do sorting till O(nlogn) but due to k size it leads to O(nlogk).
+Also ,
+1. Kth Smallest -> Create MaxHeap
+2. Kth Largest  -> Create MinHeap

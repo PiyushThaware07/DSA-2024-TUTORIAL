@@ -1,6 +1,9 @@
 '''
 Problem Statement : Kth Smallest Element in an Array
 Problem Description : Given an array of integers nums and an integer k, return the kth smallest element in the array.
+
+# ! Note : Kth Largest  : so always create a min heap.
+           Kth Smallest : so always create a max heap.
 '''
 
 import heapq
