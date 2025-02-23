@@ -1,5 +1,5 @@
 '''
-Problem Statement : Sortest Distance In Directed Acylic Graph with variable weights.
+Problem Statement : Sortest Path In Directed Acylic Graph with variable weights.
 Your task is to find the shortest path from a given source node to all other nodes in the graph using Topological Sorting (converted to a DAG using DFS/BFS traversal).
 
 Example :
