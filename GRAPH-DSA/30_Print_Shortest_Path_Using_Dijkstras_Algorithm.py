@@ -1,5 +1,4 @@
 import heapq
-
 class Solution:
     def __init__(self):
         # Step 1: Define the graph as an adjacency list
