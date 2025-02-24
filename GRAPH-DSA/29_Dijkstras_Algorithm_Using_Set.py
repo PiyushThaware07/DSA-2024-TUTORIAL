@@ -1,3 +1,41 @@
+
+# ! Here we are finding the distance of each node from the source node
+class Solution:
+    def __init__(self):
+        self.graph = {
+            0 : [(1,2),(2,6)],
+            1 : [(0,2),(3,5)],
+            2 : [(0,6),(3,8)],
+            3 : [(2,8),(1,5),(4,10),(5,15)],
+            4 : [(3,10),(6,2)],
+            5 : [(3,15),(6,6)],
+            6 : [(4,2),(5,6)]
+        }
+    
+    def dijkstra(self,src):
+        # Step 1: Initialize distances
+        distances = [float("inf")]*len(self.graph)
+        distances[src] = 0
+        # Step 2: Use a set to track unprocessed nodes
+        unvisited = set(self.graph.keys())
+        while unvisited:
+            # Step 3: Find the node with the smallest distance
+            currentNode = min(unvisited, key=lambda node: distances[node])
+            unvisited.remove(currentNode)
+            # Step 4: Update distances to neighboring nodes
+            for neighbor,weight in self.graph[currentNode]:
+                newDistance = distances[currentNode] + weight
+                if distances[neighbor] > newDistance:
+                    distances[neighbor] = newDistance
+        print(distances)
+sol = Solution()
+sol.dijkstra(0)
+
+
+
+
+
+'''
 class Solution:
     def dijkstra(self, edges, source):
         # Step 1: Create an adjacency list
@@ -55,3 +93,4 @@ src = 0
 
 sol = Solution()
 sol.dijkstra(adj, src)
+'''

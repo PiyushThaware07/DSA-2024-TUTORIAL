@@ -43,8 +43,23 @@ Topological sorting is used to order vertices in a **Directed Acyclic Graph (DAG
 
 ---
 # Shortest Path 
-### 1. Using DFS
+### 1. Using DFS + Topological Sort
 - Topological Sort → Process nodes in the correct order using DFS.
 - Initialize Distances → Start with ∞, set source = 0.
 - Relaxation → Update shortest paths using stack order
     - dist[v]=min(dist[v],dist[u]+weight(u,v))
+
+### 2. Using Dijkstra’s Algorithm : Dijkstra’s Algorithm is used to find the shortest path from a single source node to all other nodes in a weighted graph.
+- Rules : 
+   * It work for Weighted graphs (where edges have a cost or distance).
+   * Graphs with only positive weights (Dijkstra fails with negative weights).
+   * Both directed and undirected graphs.
+
+- Usage : 
+  * Network Routing (e.g., shortest path in the internet)
+  * Google Maps & GPS Navigation
+  * Urban Planning
+  
+- Ways Of Implementation : 
+  1. Priority Queue (minHeap) -> Uses heapq (minHeap) to always process the closest node first.Best for large graphs with many edges.
+  2. Set -> Uses an unordered set to track unvisited nodes.Best for small graphs.
