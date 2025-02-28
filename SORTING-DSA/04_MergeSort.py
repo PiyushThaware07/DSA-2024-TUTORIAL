@@ -1,7 +1,9 @@
 '''
 Problem Statement : Merge Sort
 Note : It work on the recursively divide and merge.
-Complexity : O(nlogn)
+Complexity :
+Time Complexity : O(nlogn)
+Space Complexity : O(n)
 
 Avoid using merge sort when :
 1. You have kimited memory
