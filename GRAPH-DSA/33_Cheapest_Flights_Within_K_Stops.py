@@ -45,7 +45,7 @@ class Solution:
                 new_cost = current_cost + cost
 
                 # If the new cost is cheaper, update and add to queue
-                if new_cost < distances[neighbor]:
+                if distances[neighbor] > new_cost:
                     distances[neighbor] = new_cost
                     queue.append((stops + 1, neighbor, new_cost))
 

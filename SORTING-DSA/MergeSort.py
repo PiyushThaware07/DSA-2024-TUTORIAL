@@ -1,55 +1,59 @@
 '''
-# * Merge Sort : Merge Sort is a Divide and Conquer algorithm. It divides input array in two halves, calls itself for the two halves and then merges the two sorted halves. The merge() function is used for merging two halves. The merge(arr, l, m, r) is a key process that assumes that arr[l..m] and arr[m+1..r] are sorted and merges the two sorted sub-arrays into one.
-Main Function: merge_sort(array, start, end)
-    Input: An array array, start index start, end index end.
-        If start < end:
-        Compute middle = (start + end) // 2.
-        Recursive Call: merge_sort(array, start, middle) to sort the left half.
-        Recursive Call: merge_sort(array, middle + 1, end) to sort the right half.
-        Call merge(array, start, middle, end) to merge the sorted halves.
+Problem Statement : Merge Sort
+Note : It work on the recursively divide and merge.
+Complexity : O(nlogn)
+
+Avoid using merge sort when :
+1. You have kimited memory
+2. In-place sorting is required
+3. For small datasets
 '''
 
-def divide(array,start,end):
-    if start < end:
-        middle = (start + end) // 2
-        # Recursively divide the array into halves
-        divide(array,start,middle)
-        divide(array,middle+1,end)
-        # Conquer: merge the sorted halves
-        conquer(array,start,middle,end)
 
-def conquer(array,start,middle,end):
-    # Temporary arrays for left and right halves
-    left = array[start:middle+1]
-    right = array[middle+1:end+1]
-    # Pointers for left, right, and merged arrays
-    i = 0
-    j = 0
-    k = start
-    # Merge the two halves
-    while i < len(left) and j < len(right):
-        if left[i] <= right[j]:
-            array[k] = left[i]
-            i += 1
-        else:
-            array[k] = right[j]
-            j += 1
-        k += 1
-    # Copy any remaining elements from the left array
-    while i < len(left):
-        array[k] = left[i]
-        i += 1
-        k += 1
+
+class Solution:
+    def merge(self,nums,low,mid,high):
+        left = low
+        right = mid + 1
+        temp = []
+        # Merge the two halves
+        while left <= mid and right <= high:
+            if nums[left] < nums[right]:
+                temp.append(nums[left])
+                left += 1
+            else:
+                temp.append(nums[right])
+                right += 1
+        # Append remaining elements from left half
+        while left <= mid:
+            temp.append(nums[left])
+            left += 1
+        # Append remaining elements from right half
+        while right <= high:
+            temp.append(nums[right])
+            right += 1
+        # Copy sorted elements back to nums
+        for i in range(len(temp)):
+            nums[low+i] = temp[i]    
     
-    # Copy any remaining elements from the right array
-    while j < len(right):
-        array[k] = right[j]
-        j += 1
-        k += 1
+    
+    def divide(self,nums,low,high):
+        if low >= high:
+            return
+        mid = (low+high)//2
+        # Recursively divide both halves
+        # Left Half
+        self.divide(nums,low,mid)
+        # Right Half
+        self.divide(nums,mid+1,high)
+        # Merge the sorted halves
+        self.merge(nums,low,mid,high)
+    
+    def merge_sort(self,nums):
+        n =len(nums)
+        self.divide(nums,0,n-1)
+        print(nums)
         
-
-# Example Usage
-nums = [6,4,2,1,9,8,3,5]
-size = len(nums)
-divide(nums,0,size-1)
-print(nums)
+    
+sol = Solution()
+sol.merge_sort([3,1,2,4,1,5,6])
