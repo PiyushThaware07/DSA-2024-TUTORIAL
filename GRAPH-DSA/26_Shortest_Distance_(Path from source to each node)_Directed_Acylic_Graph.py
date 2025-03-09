@@ -5,7 +5,7 @@ Your task is to find the shortest path from a given source node to all other nod
 Example :
 graph = {
     6 : [(4,2),(5,3)],
-    5 : [{4,1}],
+    5 : [(4,1)],
     4 : [(0,3),(2,1)],
     3 : [],
     2 : [(3,3)],

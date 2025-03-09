@@ -32,6 +32,7 @@ class Solution:
             if not visited[neighbor]:
                  if self.dfs(neighbor, visited, pathVisited):  
                     return True 
+            # node visited and it is pathvisited too the cycle is present
             elif visited[neighbor] and pathVisited[neighbor]:
                 return True
         pathVisited[node] = False
