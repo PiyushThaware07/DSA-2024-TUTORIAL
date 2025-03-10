@@ -1,7 +1,7 @@
 '''
-Majority Element : Majority element must be appear more then 1/2 time of it length.
+Majority candidate : Majority candidate must be appear more then 1/2 time of it length.
 
-Given an array nums of size n, return the majority element.
+Given an array nums of size n, return the majority candidate.
 Example 1:
 Input: nums = [3,2,3]
 Output: 3
@@ -37,16 +37,16 @@ class Solution:
 
     def optimal(self,arr): # ! Moore's Voting Algorithm
         count = 0
-        element = None 
+        candidate = None 
         for i in range(len(arr)):
             if count == 0:
                 count = count + 1
-                element = arr[i]
-            elif arr[i] == element:
+                candidate = arr[i]
+            elif arr[i] == candidate:
                 count = count + 1
             else:
                 count = count - 1
-        print(element)
+        print(candidate)
 
 nums = [2,2,1,1,1,2,2]
 s = Solution()
@@ -60,8 +60,8 @@ Candidate Selection (Voting Phase):
 
 Initialize count = 0 and candidate = None.
 Traverse the array:
-If count == 0, set the current element as the candidate.
-If the current element is the same as the candidate, increment count.
+If count == 0, set the current candidate as the candidate.
+If the current candidate is the same as the candidate, increment count.
 Otherwise, decrement count.
 Candidate Verification:
 
@@ -72,11 +72,11 @@ If the count of candidate is greater than
 /
 2
 ⌋
-⌊n/2⌋, it is the majority element.
-Otherwise, no majority element exists.
+⌊n/2⌋, it is the majority candidate.
+Otherwise, no majority candidate exists.
 
 
-count | current element | candidate element
+count | current candidate | candidate candidate
   1           2                   2
   2           2                   2
   1           2                   1

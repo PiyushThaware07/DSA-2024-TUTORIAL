@@ -12,38 +12,32 @@ Bellman-Ford, on the other hand, is specifically designed to work with graphs th
 '''
 
 class Solution:
-    def bellmanFord(self,vertices,edges,source):
-        # Step 1: Initialize distances to all vertices as infinity, except the source
-        distances = [float('inf')] * vertices
-        distances[src] = 0 
+    def bellman_ford(self,edges,src,vertices):
+        # Step 1: Initialize distances from source to all vertices as infinity
+        distances = {node:float("inf") for node in range(vertices)}
+        distances[src] = 0
         
-        # Step 2: Relax all edges |V| - 1 times
-        for _ in range(vertices - 1):
-            for edge in edges:
-                u = edge[0]
-                v = edge[1]
-                w = edge[2]
-                if (distances[u] != float("inf") and distances[u] + w < distances[v]):
-                    distances[v] = distances[u] + w
-                            
-        # Step 3: Check for negative weight cycles
-        for edge in edges:
-            u = edge[0]
-            v = edge[1]
-            w = edge[2]
-            if (distances[u] != float("inf") and distances[u] + w < distances[v]):
-                return [-1]
         
-        return distances
+        # Step 2: Relax all edges V-1 times    
+        for i in range(vertices-1):
+            for src,dest,weight in edges:
+                if distances[src] != float("inf") and distances[src] + weight < distances[dest]:
+                    distances[dest] = distances[src] + weight
+        print(distances)
+        
+        
+        # Step 3: Detect negative weight cycle
+        for src,dest,weight in edges:
+            if distances[src] != float("inf") and distances[src]+weight < distances[dest]:
+                print("Graph contains a negative weight cycle!")
+                return
+        else:
+            print("Cycle Not Found")
 
                     
             
-# Example Usage
-edges = [[0, 1, 5], [1, 0, 3], [1, 2, -1], [2, 0, 1]]
-src = 2
-vertices = 3
 
 sol = Solution()
-result = sol.bellmanFord(vertices,edges,src)
-print(result)
+sol.bellman_ford([(0, 1, 5), (1, 0, 3), (1, 2, -1), (2, 0, 1)], 2, 3)
+sol.bellman_ford([(0, 1, 1),(1, 2, -2),(2, 3, -3),(3, 1, 4) ], 0, 4)
 

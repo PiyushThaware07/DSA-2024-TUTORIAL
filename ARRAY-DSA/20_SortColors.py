@@ -7,6 +7,22 @@ class Solution:
                     arr[p1] = arr[p2]
                     arr[p2] = temp
         print(arr)
+    
+    
+    def better(self,arr):
+        zeros = 0
+        onces = 0
+        twos = 0
+        for num in arr:
+            if num == 0:
+                zeros += 1
+            elif num == 1:
+                onces += 1
+            elif num == 2:
+                twos += 1
+        result = [0] * zeros + [1] * onces + [2] * twos
+        print(result)
+    
 
     def optimal(self,arr):
         left = 0
@@ -31,4 +47,5 @@ class Solution:
 nums = [2,0,2,1,1,0]
 s = Solution()
 s.brute(nums)
+s.better(nums)
 s.optimal(nums)
