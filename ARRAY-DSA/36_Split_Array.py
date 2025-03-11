@@ -33,7 +33,7 @@ for num in nums:
     if num not in hashMap:
         hashMap[num] = 1
     else:
-        hashMap[num] = hashMap[num]+1
+        hashMap[num] += 1
 for key in hashMap:
     if hashMap[key] > 2:
         print(False)
