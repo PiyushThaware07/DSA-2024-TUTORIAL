@@ -25,30 +25,35 @@ class Solution:
         print(count)
 
 
+    '''
+    Explanation:
+        - Uses a hashmap (prefixSum) to store prefix sums and their frequencies.
+        - Checks if `currentSum - k` exists in `prefixSum` to count valid subarrays.
+        - Updates `prefixSum` at each step.
+        - Time Complexity: O(n), Space Complexity: O(n).
+    '''
     def optimal(self,arr,k):
         n = len(arr)
-        prevSum = 0
-        counter = 0
-        hashMap = {}
-        hashMap[0]=1
+        prefixSum = {0:1}  # currentSum,frequency -> # Stores prefix sum frequencies
+        currentSum = 0
+        count = 0
         for i in range(0,n):
-            prevSum = prevSum + arr[i]
-            # If check is in hashMap, add its count to counter
-            if prevSum - k  in hashMap:
-                counter += hashMap[prevSum - k ]
-            # update hashMap
-            if prevSum in hashMap:
-                hashMap[prevSum] += 1
+            currentSum += arr[i]
+            # Check if a subarray ending here sums to k
+            if currentSum - k in prefixSum:
+                count += prefixSum[currentSum-k]
+            # Update prefixSum dictionary
+            if currentSum not in prefixSum:
+                prefixSum[currentSum] = 1
             else:
-                hashMap[prevSum] = 1
-        print(counter)
+                prefixSum[currentSum] += 1
+        print(count)
 
 
 
-
-# numbers = [1,1,1]
 # numbers = [1,2,3]
 numbers = [1,2,3,-3,1,1,1,4,2,-3]
+# numbers = [1,1,1]
 s = Solution()
 s.brute(numbers,3)
 s.optimal(numbers,3)

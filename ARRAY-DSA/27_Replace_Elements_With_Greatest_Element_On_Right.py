@@ -30,6 +30,18 @@ class Solution:
                 maximum = max(maximum,arr[j])
             result.append(maximum)
         print(result)
+
+    def better(self,arr):
+        nums = arr[:]   # cloning array
+        n = len(nums)
+        for i in range(0,n):
+            largest = 0
+            for j in range(i+1,n):
+                if nums[j] > largest:
+                    largest = nums[j]
+            nums[i] = largest
+        nums[n-1] = -1
+        print(nums)
             
     
     def optimal(self,arr):
@@ -47,4 +59,5 @@ numbers = [17,18,5,4,6,1]
 # numbers = [16,17,4,3,5,2]
 s = Solution()
 s.brute(numbers)
+s.better(numbers)
 s.optimal(numbers)

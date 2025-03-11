@@ -11,8 +11,14 @@ Example 2:
     Output: false
     Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
 '''
-num = 131
-num = -121
-strNum = str(num)
-reverseStrNum = strNum[::-1]
-print(strNum == reverseStrNum)
+class Solution:
+    def palindromNumber(self,num):
+        if num < 0:
+            return False
+        strNum = str(num)
+        reverseStrNum = strNum[::-1]
+        return strNum == reverseStrNum
+sol = Solution()
+print(sol.palindromNumber(-121))
+print(sol.palindromNumber(121))
+print(sol.palindromNumber(10))
