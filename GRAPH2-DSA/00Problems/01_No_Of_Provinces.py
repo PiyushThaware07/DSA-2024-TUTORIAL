@@ -21,25 +21,21 @@ class Solution:
             9: []
         }
     
-    def no_of_provinces(self):
-        def dfs(node, visited):
-            stack = [node]
-            while stack:
-                current = stack.pop()
-                if not visited[current]:
-                    visited[current] = True
-                    for neighbor in self.graph[current]:
-                        if not visited[neighbor]:
-                            stack.append(neighbor)
-        
-        visited = {node: False for node in self.graph}
+    def no_of_provines(self):
+        def dfs(node,visited):
+            visited[node] = True
+            for neighbor in self.graph[node]:
+                if not visited[neighbor]:
+                    dfs(neighbor,visited)
+        visited = {node:False for node in self.graph}
         count = 0
         for node in self.graph:
             if not visited[node]:
                 count += 1
-                dfs(node, visited)
-        print("No of provinces ~>", count)
+                dfs(node,visited)
+        print("total no of provinces are --> ",count)
+        return
+                
 
-# Example Usage
 sol = Solution()
-sol.no_of_provinces()
+sol.no_of_provines()
