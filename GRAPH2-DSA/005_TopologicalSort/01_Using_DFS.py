@@ -24,32 +24,29 @@ possible sort - 2 : 452310
 '''
 
 class Solution:
-    def dfs(self,node,visited,result,matrix):
-        visited[node] = 1
-        for neighbor in matrix[node]:
-            if visited[neighbor] == 0:
-                self.dfs(neighbor,visited,result,matrix)
-        result.append(node)
-    
-    def topologicalSort(self,matrix):
-        size = len(matrix)
-        visited = [0] * size
+    def topologicalSort(self,graph):
+        def dfs(node,visited,result):
+            visited[node] = True
+            for neighbor in graph[node]:
+                if not visited[neighbor]:
+                    dfs(neighbor,visited,result)
+            result.append(node)
+        visited = {node:False for node in graph}
         result = []
-        for node in range(len(matrix)):
-            if visited[node] == 0:
-                self.dfs(node,visited,result,matrix) 
+        for node in graph:
+            dfs(node,visited,result)
         result = result[::-1]
-        print(result)
-
-
-matrix = {
-    5 : [0,2],
-    2 : [3],
+        print("topological sort using dfs --> ",result)
+                
+            
+sol = Solution()
+# Usage - 01
+graph = {
     0 : [],
     1 : [],
+    2 : [3],
     3 : [1],
     4 : [0,1],
+    5 : [0,2]
 }
-sol = Solution()
-sol.topologicalSort(matrix)
-    
+sol.topologicalSort(graph)
