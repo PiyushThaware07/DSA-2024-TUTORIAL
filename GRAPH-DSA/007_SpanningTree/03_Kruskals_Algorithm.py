@@ -33,16 +33,26 @@ class DisjointSet:
 
 
 class Solution:
+    """
+    Kruskals Algorithm to find the Minimum Spanning Tree (MST).
+    1. Sort the edges by weight.
+    2. Iterate through the edges:
+      - If adding an edge does not create a cycle, include it in the MST.
+    3. Use the Disjoint Set (Union-Find) to efficiently check for cycles.
+    """
     def kruskalAlgorithm(self,vertices,edges):
       # 1. step-1 : sort the edges based on there weights
       edges.sort(key=lambda x:x[2])
       ds = DisjointSet(vertices)
       mst = []
       totalSum = 0
-
+      
+      # Step 2: Iterate through sorted edges
       for u,v,weight in edges:
-        rootU = ds.findParent(u)
-        rootV = ds.findParent(v)
+        rootU = ds.findParent(u)  # Find root of vertex u
+        rootV = ds.findParent(v)  # Find root of vertex v
+
+        # Step 3: If u and v belong to different sets, add edge to MST
         if rootU != rootV:
           ds.unionByRank(u,v)
           mst.append((u, v, weight))
@@ -55,4 +65,4 @@ class Solution:
     
 sol = Solution()
 sol.kruskalAlgorithm(4,[(0, 1, 10), (0, 2, 6), (0, 3, 5),(1, 3, 15), (2, 3, 4)])
-    
+sol.kruskalAlgorithm(10,[(1,2,0),(2,4,2),(1,3,1),(3,5,1),(5,4,2),(3,8,1),(5,8,3),(5,9,0),(9,4,4)])
