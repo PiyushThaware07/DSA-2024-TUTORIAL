@@ -11,14 +11,15 @@ steps :
 class Solution:
     def optimal(self, arr):
         n = len(arr)
-        maximum = 0
+        leader = -1
         result = []
-        for i in range(n - 1, -1, -1):  # Iterate from right to left
-            if arr[i] >= maximum:  # If the current element is greater or equal to the maximum
-                result.append(arr[i])  # Add it to the result
-            maximum = max(arr[i], maximum)  # Update the maximum
-        result.reverse()  # Reverse the result to maintain left-to-right order
+        for i in range(n-1,-1,-1):
+            if arr[i] >= leader:
+                result.append(arr[i])
+                leader = arr[i]
+        result = result[::-1]
         print(result)
+
 
 
 
@@ -26,7 +27,6 @@ class Solution:
                 
 
 
-numbers = [16,17,4,3,5,2]
-# numbers = [10,4,2,4,1]
 s = Solution()
-s.optimal(numbers)
+s.optimal([16,17,4,3,5,2])
+s.optimal([10,4,2,4,1])

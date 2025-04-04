@@ -23,13 +23,14 @@ Explanation: There are no elements to the right of index 0.
 class Solution:
     def brute(self,arr):
         n = len(arr)
-        result = []
+        result = [-1]*n
         for i in range(0,n):
-            maximum = -1
+            current = -1
             for j in range(i+1,n):
-                maximum = max(maximum,arr[j])
-            result.append(maximum)
+                current = max(current,arr[j])
+            result[i] = max(result[i],current)
         print(result)
+
 
     def better(self,arr):
         nums = arr[:]   # cloning array

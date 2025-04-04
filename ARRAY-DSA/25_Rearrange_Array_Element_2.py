@@ -54,3 +54,22 @@ ans = RearrangebySign(A, n)
 
 for i in range(len(ans)):
     print(ans[i], end=" ")
+
+
+
+
+# OPTIMIZE ====================================================
+def optimize(nums):
+    n = len(nums)
+    result = [0] * n
+    positiveIndex = 0
+    negativeIndex = 1
+    for num in nums:
+        if num > 0 and positiveIndex < len(result):
+            result[positiveIndex] = num
+            positiveIndex += 2
+        elif num < 0 and negativeIndex < len(result):
+            result[negativeIndex] = num
+            negativeIndex += 2
+    print(result)
+optimize([1, 2, -4, -5, 3, 4])

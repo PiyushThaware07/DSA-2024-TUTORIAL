@@ -25,23 +25,21 @@ class Solution:
     
 
     def optimal(self,arr):
-        left = 0
-        middle = 0
-        right = len(arr)-1
-        while (middle<=right):
-            if arr[middle] == 0:
-                temp = arr[left]
-                arr[left] = arr[middle]
-                arr[middle] = temp 
-                left = left + 1
-                middle = middle + 1
-            elif arr[middle] == 2:
-                temp = arr[middle]
-                arr[middle] = arr[right]
-                arr[right] = temp
-                right = right - 1
-            else:
-                middle = middle + 1
+        n = len(arr)
+        low = 0
+        mid = 0
+        high = n-1
+        while mid <= high:
+            if arr[mid] == 0:
+                arr[mid] , arr[low] = arr[low] , arr[mid]
+                low += 1
+                mid += 1
+            elif arr[mid] == 1:
+                arr[mid] += 1
+            elif arr[mid] == 2:
+                arr[mid] , arr[high] = arr[high],arr[mid]
+                high -=1 
+                mid += 1
         print(arr)
 
 nums = [2,0,2,1,1,0]

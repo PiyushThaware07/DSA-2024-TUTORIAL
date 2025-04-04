@@ -1,31 +1,39 @@
-# Brute Force
-input = [-2,5,-5,0,3,-9]
-output = [5,0,3,-2,-5,-9]
+class Solution:
+    def brute(self,nums):
+        positives = []
+        negatives = []
+        for num in nums:
+            if num >= 0:
+                positives.append(num)
+            else:
+                negatives.append(num)
+        positives.extend(negatives)
+        print(positives)
 
-positive = []
-negative = []
-for i in range(0,len(input)):
-    # handle negative number
-    if input[i]<0:
-        negative.append(input[i])
-    else:
-        positive.append(input[i])
-positive.extend(negative)
-print(positive)
+    
+    def optimize(self,nums):
+        n = len(nums)
+        ptr1 = 0  # Pointer for the first negative number
+
+        # Find the first negative element
+        while ptr1 < n and nums[ptr1] >= 0:
+            ptr1 += 1
+        
+        # Stable shifting process
+        for ptr2 in range(ptr1 + 1, n):
+            if nums[ptr2] >= 0:  
+                temp = nums[ptr2]
+                # Shift elements right to make space for the non-negative number
+                for k in range(ptr2, ptr1, -1):
+                    nums[k] = nums[k - 1]
+                nums[ptr1] = temp  # Place the non-negative number in its correct position
+                ptr1 += 1  # Move ptr1 to the next negative number
+        
+        print(nums)  # Output the modified array
 
 
-
-# Better
-input = [-2,5,-5,0,3,-9]
-def swap(arr,i,j):
-    temp =arr[i]
-    arr[i] = arr[j]
-    arr[j] = temp
-
-for i in range(0,len(input)):
-    for j in range(i+1,len(input)):
-        if input[j]>=0 and input[j]>input[i]:
-            swap(input,i,j)
-            print(input)
-            break
-print(input)
+        
+    
+sol = Solution()
+sol.brute([-2,5,-5,0,3,-9,8])
+sol.optimize([-2,5,-5,0,3,-9,8])

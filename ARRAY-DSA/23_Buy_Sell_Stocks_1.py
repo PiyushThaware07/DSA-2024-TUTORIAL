@@ -76,4 +76,23 @@ for index in range(minDay,len(nums)):
         profit = nums[index] - minDay
         maxProfit = max(maxProfit,profit)
 print(maxProfit)
+
+
+
+
+
+===========================================
+prices = [7,1,4,6 ,3,1,11]
+n = len(prices)
+
+maxProfit = 0
+for i in range(1,n):
+    j = i
+    while j >= 0:
+        profit = prices[i] - prices[j]
+        maxProfit = max(maxProfit,profit)
+        j -= 1
+print(maxProfit)
 '''
+
+
