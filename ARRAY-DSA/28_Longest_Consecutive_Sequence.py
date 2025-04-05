@@ -24,11 +24,11 @@ class Solution:
 
         '''
         n = len(arr)
-        longest = 1
+        longest = 0
         for i in range(0,n):
             temp = arr[i]
-            count = 1
-            while temp+1 in arr:
+            count = 0
+            while temp in arr:
                 temp = temp + 1
                 count = count + 1
                 longest = max(count,longest)
@@ -51,23 +51,30 @@ class Solution:
         print(longest)
 
     def optimal(self,arr):
-        arr = list(set(arr))  
-        arr.sort()            
+        if not arr:
+            print(0)
+            return
+        
         n = len(arr)
+        longest = 1
         count = 1
-        longest = 1 
-        for i in range(1, n):
-            if arr[i - 1] + 1 == arr[i]:
+        for i in range(1,n):
+            # BASE CASE : Handle dublicates
+            if arr[i-1] == arr[i]:
+                continue
+            elif arr[i-1]+1 == arr[i]:
                 count += 1
+                longest = max(longest,count)
             else:
-                longest = max(longest, count)
                 count = 1
-        longest = max(longest, count)
         print(longest)
+        return
+
 
         
 numbers = [0,3,7,2,5,8,4,6,0,1]
-numbers = [100,4,200,1,3,2]
+# numbers = [100,4,200,1,3,2]
+numbers = [1,0,1,2]
 s = Solution()
 s.brute(numbers)
 s.better(numbers)
