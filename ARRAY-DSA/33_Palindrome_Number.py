@@ -12,13 +12,14 @@ Example 2:
     Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
 '''
 class Solution:
-    def palindromNumber(self,num):
+    def isPalindrome(self,num):
         if num < 0:
             return False
-        strNum = str(num)
-        reverseStrNum = strNum[::-1]
-        return strNum == reverseStrNum
+        else:
+            strNum = str(num)
+            return strNum == strNum[::-1]
+
 sol = Solution()
-print(sol.palindromNumber(-121))
-print(sol.palindromNumber(121))
-print(sol.palindromNumber(10))
+print(sol.isPalindrome(-121))
+print(sol.isPalindrome(121))
+print(sol.isPalindrome(10))
