@@ -18,7 +18,7 @@ Example 3:
     Output: False
     Explanation: We cannot rearrange the hand into groups of 3 consecutive numbers.
 '''
-
+import heapq
 class Solution:
     """
     1. Sorting
@@ -45,8 +45,36 @@ class Solution:
                 stack = []
         else:
             return True
+        
+
+    def optimize(self,hands,groupSize):
+        freqs = {}
+        for hand in hands:
+            if hand not in freqs:
+                freqs[hand] = 1
+            else:
+                freqs[hand] += 1
+        
+        minHeap = list(freqs.keys())
+        heapq.heapify(minHeap)
+        while minHeap:
+            first = minHeap[0]
+            for i in range(groupSize):
+                current = first + i
+                if current not in freqs:
+                    return False
+                freqs[current] -= 1
+                if freqs[current] == 0:
+                    del freqs[current]
+                    if current == minHeap[0]:
+                        heapq.heappop(minHeap)
+        return True
 
 sol = Solution()
 print(sol.brute([1,2,3,6,2,3,4,7,8],3))
 print(sol.brute([1,2,3,4,5],4))
 print(sol.brute([8,10,12],3))
+
+print(sol.optimize([1,2,3,6,2,3,4,7,8],3))
+print(sol.optimize([1,2,3,4,5],4))
+print(sol.optimize([8,10,12],3))

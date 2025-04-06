@@ -13,9 +13,10 @@ class Solution:
             if len(minHeap) > k:
                 element = heapq.heappop(minHeap)
                 result.append(element)
-        result.extend(minHeap)
+        while minHeap:
+            result.append(heapq.heappop(minHeap))
         print(result)
         
     
 sol = Solution()
-sol.nearlySorted([6,5,3,2,8,10,9],2)
+sol.nearlySorted([6,5,3,2,8,10,9],3)
