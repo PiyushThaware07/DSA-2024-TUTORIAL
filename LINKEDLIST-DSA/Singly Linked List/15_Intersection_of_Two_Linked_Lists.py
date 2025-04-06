@@ -37,8 +37,38 @@ class Solution:
         # If no intersection is found, print "None" and return None
         print("None")
         return None
+    
 
-
+    def optimize(self,list1,list2):
+        head1 = list1.head
+        head2 = list2.head
+        length1 = 0
+        while head1 is not None:
+            length1 += 1
+            head1 = head1.next
+        
+        length2 = 0
+        while head2 is not None:
+            length2 += 1
+            head2 = head2.next
+        
+        head1 = list1.head
+        while length1 > length2:
+            head1 = head1.next
+            length1 -= 1
+        
+        head2 = list2.head
+        while length2 > length1:
+            head2 = head2.next
+            length2 -= 1
+        
+        while head1 and head2:
+            if head1 == head2:
+                print("Intersection found at : ", head1.data)
+                return
+            head1 = head1.next
+            head2 = head2.next
+        print("No Intersection found!")
             
 
 
@@ -61,8 +91,9 @@ ll2.addEnd(5)
 # ll2.traversal()
 
 # Make ll2 intersect ll1 at node with value 8 for demonstration
-ll1.head.next.next.next = ll2.head.next.next
+ll1.head.next.next.next.next = ll2.head.next.next.next
 
 
 s = Solution()
 s.brute(ll1,ll2)
+s.optimize(ll1,ll2)
