@@ -126,3 +126,36 @@ root.delete(5)
 
 print("\nAfter deletion:")
 root.traversal()
+
+
+
+
+'''
+    def delete(self, target):
+        if self is None:
+            return None
+
+        if target < self.key:
+            if self.lchild:
+                self.lchild = self.lchild.delete(target)
+            else:
+                print("Targeted node not present!")
+        elif target > self.key:
+            if self.rchild:
+                self.rchild = self.rchild.delete(target)
+            else:
+                print("Targeted node not present!")
+        else:
+            if self.lchild is None and self.rchild is None:
+                return None
+            if self.lchild is None:
+                return self.rchild
+            if self.rchild is None:
+                return self.lchild
+            min_larger_node = self.rchild
+            while min_larger_node.lchild:
+                min_larger_node = min_larger_node.lchild
+            self.key = min_larger_node.key
+            self.rchild = self.rchild.delete(min_larger_node.key)
+        return self
+'''
