@@ -9,11 +9,13 @@ class BT:
             return True 
         stack.append(self.data)
         # Search in left subtree
-        if self.lchild and self.lchild.findAncestor(target, stack):
-            return True
+        if self.lchild:
+            if self.lchild.findAncestor(target, stack):
+                return True
         # Search in right subtree
-        if self.rchild and self.rchild.findAncestor(target, stack):
-            return True
+        if self.rchild:
+            if self.rchild.findAncestor(target, stack):
+                return True
         stack.pop()  
         return False
 

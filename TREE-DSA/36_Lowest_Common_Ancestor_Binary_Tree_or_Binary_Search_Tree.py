@@ -1,3 +1,9 @@
+'''
+You pick two people, and you want to find their common grandparent or parent — the one who is closest to both of them.
+That person is called the Lowest Common Ancestor.
+'''
+
+
 class BT:
     def __init__(self,data):
         self.data = data

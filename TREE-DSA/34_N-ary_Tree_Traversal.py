@@ -1,59 +1,61 @@
-class BinaryTree:
+'''
+Narray Tree :
+An N-ary tree (or N-ary tree) is a generalized tree data structure where each node can have at most N children, rather than just two like in a binary tree.
+'''
+
+class NarrayTree:
     def __init__(self, val, children=None):
         self.val = val
-        self.children = children if children is not None else [] 
-    
+        self.children = children if children is not None else []
+
     def postorder(self):
         result = []
         def helper(node):
             if node:
                 for child in node.children:
-                    helper(child)
+                    helper(child) 
                 result.append(node.val)
         helper(self)
-        print("PostOrder Traversal:", result)
+        print("Postorder traversal is ~~~> ",result)
 
     def preorder(self):
         result = []
         def helper(node):
-            if node:
-                result.append(node.val)
-                for child in node.children:
-                    helper(child)
+            result.append(node.val)
+            for child in node.children:
+                helper(child)
         helper(self)
-        print("PreOrder Traversal:", result)
+        print("Preorder traversal is ~~~> ",result)
 
     def inorder(self):
         result = []
         def helper(node):
             if node:
-                mid = len(node.children) // 2  # Find the middle index
-                
-                # Traverse first half of children
+                mid = len(node.children) // 2
                 for child in node.children[:mid]:
                     helper(child)
-                
-                # Process the root
                 result.append(node.val)
-                
-                # Traverse second half of children
                 for child in node.children[mid:]:
                     helper(child)
-
         helper(self)
-        print("InOrder Traversal:", result)
+        print("Inorder traversal is ~~~> ",result)
+        
 
 
-# Example N-ary Tree:
-root = BinaryTree(1, [
-    BinaryTree(3, [
-        BinaryTree(5),
-        BinaryTree(6)
+
+root = NarrayTree(13, [
+    NarrayTree(11, [
+        NarrayTree(9)
     ]),
-    BinaryTree(2),
-    BinaryTree(4)
+    NarrayTree(3, [
+        NarrayTree(12)
+    ]),
+    NarrayTree(15, [
+        NarrayTree(14),
+        NarrayTree(17)
+    ])
 ])
 
-root.postorder()  # Output: [5, 6, 3, 2, 4, 1]
-root.preorder()   # Output: [1, 3, 5, 6, 2, 4]
-root.inorder()    # Output: [5, 3, 6, 1, 2, 4]  (based on N-ary inorder logic)
+root.postorder()
+root.preorder()
+root.inorder()
