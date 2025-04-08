@@ -15,3 +15,4 @@ class Solution:
 
 sol = Solution()
 sol.coinChange([1,2,5],5)
+sol.coinChange([1,2],5)

@@ -4,22 +4,17 @@ class BT:
         self.lchild = None
         self.rchild = None
 
-    def optimize(self, path):
-        if not self:
-            return
-
+    def optimize(self, path=[]):
         path.append(self.key)
-
         # If it's a leaf node, print the path
         if self.lchild is None and self.rchild is None:
             print(" -> ".join(map(str, path)))
-
-        # Recursively call for left and right subtrees if they exist
-        if self.lchild:
-            self.lchild.optimize(path)
-        if self.rchild:
-            self.rchild.optimize(path)
-
+        else:
+            # Recursively call for left and right subtrees if they exist
+            if self.lchild:
+                self.lchild.optimize(path)
+            if self.rchild:
+                self.rchild.optimize(path)
         # Backtrack to explore other paths
         path.pop()
 
@@ -34,4 +29,4 @@ root.rchild.lchild = BT(12)
 root.rchild.rchild = BT(20)
 
 # Call the function
-root.optimize([])
+root.optimize()

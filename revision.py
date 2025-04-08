@@ -309,17 +309,83 @@ class Tree:
             print(result)
         bottomView(self)
 
+    def checkMirror(self,root2):
+        root1 = self
+        if root1 is None and root2 is None:
+            return True
+        if root1 is None or root2 is None:
+            return False
+        return (
+            (root1.key == root2.key) and 
+            (root1.lchild.checkMirror(root2.rchild) if root1.lchild and root2.rchild else root1.lchild == root2.rchild) and
+            (root1.rchild.checkMirror(root2.lchild) if root1.rchild and root2.lchild else root1.rchild == root2.lchild))
+    
+    def isEvenOdd(self):
+        queue = [self]
+        index = 0
+        while queue:
+            levelSize = len(queue)
+            levelNode = []
+            for _ in range(levelSize):
+                currentNode = queue.pop(0)
+                if index % 2 == 0: # even + even integer (it must be odd)
+                    if currentNode.key % 2 == 0:
+                        return False
+                else:               # odd + odd integer (it must be even)
+                    if currentNode.key % 2 != 0:
+                        return False
+                levelNode.append(currentNode.key)
+                if currentNode.lchild:
+                    queue.append(currentNode.lchild)
+                if currentNode.rchild:
+                    queue.append(currentNode.rchild)
+            if index % 2 == 0: # even + decreasing
+                for i in range(1,len(levelNode)):
+                    if levelNode[i-1] >= levelNode[i]:
+                        return False
+            else:
+                for i in range(1,len(levelNode)):
+                    if levelNode[i-1] <= levelNode[i]:
+                        return False
+            index += 1
+        return True
+    
+    def isValidBST(self):
+        def check(minValue,node,maxValue):
+            if node is None:
+                return True
+            if not (minValue < node.key < maxValue):
+                return False
+            return check(minValue,node.lchild,node.key) and check(node.key,node.rchild,maxValue)
+        print(check(float("-inf"),self,float("inf")))
+                    
+    def printRootToLeafPaths(self,paths=[]):
+        paths.append(self.key)
+        if self.lchild is None and self.rchild is None:
+            print(paths)
+        else:
+            if self.lchild:
+                self.lchild.printRootToLeafPaths(paths)
+            if self.rchild:
+                self.rchild.printRootToLeafPaths(paths)
+        paths.pop()
 
+    def maxPathSum(self,maximum):
+        if self is None:
+            return 0
+        lh = self.lchild.maxPathSum(maximum) if self.lchild else 0
+        rh = self.rchild.maxPathSum(maximum) if self.rchild else 0
+        total = self.key + lh + rh
+        maximum[0] = max(maximum[0],total)
+        return self.key + max(lh,rh)
 
-# Driver code
-root = Tree(8)
-root.lchild = Tree(3)
-root.lchild.lchild = Tree(1)
-root.lchild.lchild.rchild = Tree(4)
-root.lchild.rchild = Tree(6)
-root.lchild.rchild.rchild = Tree(7)
-root.rchild = Tree(10)
-root.rchild.rchild = Tree(14)
-root.rchild.rchild.lchild = Tree(13)
+        
 
-root.traversal()
+root = Tree(-10)
+root.lchild = Tree(9)
+root.rchild = Tree(20)
+root.rchild.lchild = Tree(15)
+root.rchild.rchild = Tree(7)
+maximum = [float('-inf')]
+root.maxPathSum(maximum)
+print(maximum[0])

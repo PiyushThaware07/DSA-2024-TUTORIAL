@@ -5,22 +5,27 @@ class BT:
         self.rchild = None
     
     def optimize(self):
-        maxSum = float("-inf")
-        def helper(node):
-            nonlocal maxSum
-            if not node:
+        def helper(node, maximum):
+            if node is None:
                 return 0
-            lhSum = helper(node.lchild)
-            if lhSum < 0:
-                lhSum = 0
-            rhSum = helper(node.rchild)
-            if rhSum < 0:
-                rhSum = 0
-            currentSum = node.key + rhSum + lhSum
-            maxSum = max(maxSum,currentSum)
-            return node.key + max(lhSum,rhSum)
-        helper(self)
-        print("Total Sum of the Tree : ",maxSum)
+            
+            # Recursively get max path sum for left and right child
+            lh = max(helper(node.lchild, maximum), 0)
+            rh = max(helper(node.rchild, maximum), 0)
+
+            # Calculate max path passing through this node
+            total = node.key + lh + rh
+            maximum[0] = max(maximum[0], total)
+
+            # Return max path sum where current node is end point
+            return node.key + max(lh, rh)
+
+        maximum = [float('-inf')]
+        helper(self, maximum)
+        print("Maximum Path Sum:", maximum[0])
+        
+
+
     
 root = BT(-10)
 root.lchild = BT(9)
