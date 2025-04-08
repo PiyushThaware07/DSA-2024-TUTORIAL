@@ -10,8 +10,45 @@ class BT:
         self.lchild = None
         self.rchild = None
     
+    '''
+    Algorithm :
+    Base Condition – Null Node
+
+    If the current node (self) is None,
+    → return None.
+    (Reached the end of a path without finding p or q.)
+
+    Check for Match
+
+    If self.key is equal to p OR q,
+    → return the current node (self).
+    (This means one of the target nodes has been found.)
+
+    Recursive Traversal
+
+    Move left:
+    → left = lca(p, q) on self.lchild if it exists.
+
+    Move right:
+    → right = lca(p, q) on self.rchild if it exists.
+
+    Post-Processing After Recursion
+
+    If both left and right are None:
+    → return None (nothing found in either subtree).
+
+    If only one is not None (either left or right):
+    → return that non-None value.
+    (Means either p or q is found in one subtree.)
+
+    If both left and right are not None:
+    → return the current node (self).
+    (Means p and q are found in different subtrees, so self is their LCA.)
+    '''
     def lowestCommonAncestor(self,p,q):
-        if self is None or self.data == p or self.data == q:
+        if self is None:
+            return None
+        if self.data == p or self.data == q:
             return self
         left = self.lchild.lowestCommonAncestor(p,q) if self.lchild else None
         right = self.rchild.lowestCommonAncestor(p,q) if self.rchild else None

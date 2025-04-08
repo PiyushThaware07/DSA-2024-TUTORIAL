@@ -1,35 +1,30 @@
-class BST:
+class BinaryTree:
     def __init__(self, key):
         self.key = key
         self.lchild = None
         self.rchild = None
-    
-    def findAncestor(self,target,stack):
-        if self.key == target:
-            return True
-        stack.append(self.key)
-        if self.lchild:
-            if self.lchild.findAncestor(target,stack): 
-                return True
-        if self.rchild:
-            if self.rchild.findAncestor(target,stack):
-                return True        
-        stack.pop()
-        return False
+
+    def treeToArray(self):
+        indexing = {}
+        queue = [(self,0)] # node,index
+        while queue:
+            node,index = queue.pop(0)
+            indexing[index] = node.key
+            if node.lchild:
+                queue.append((node.lchild,2*index+1))
+            if node.rchild:
+                queue.append((node.rchild,2*index+2))
+        print(indexing)
 
 
-    
 
-# Tree structure
-root = BST(10)
-root.lchild = BST(5)
-root.lchild.lchild = BST(2)
-root.lchild.rchild = BST(7)
-root.rchild = BST(15)
-root.rchild.rchild = BST(20)
-root.rchild.rchild.lchild = BST(30)
-root.rchild.rchild.rchild = BST(40)
 
-stack = []
-root.findAncestor(40,stack)
-print(stack)
+# Build tree
+root = BinaryTree(1)
+root.lchild = BinaryTree(2)
+root.lchild.lchild = BinaryTree(4)
+root.lchild.rchild = BinaryTree(5)
+root.lchild.rchild.lchild = BinaryTree(6)
+root.lchild.rchild.rchild = BinaryTree(7)
+root.rchild = BinaryTree(3)
+root.treeToArray()

@@ -5,17 +5,19 @@ class BST:
         self.rchild = None
     
     def findTarget(self,k,hashmap=None):
+        if self is None:
+            return False
         if hashmap is None:
             hashmap = {}
-        diff = k - self.data
-        if diff not in hashmap:
-            hashmap[self.data] = diff
-        else:
+        if k - self.data in hashmap:
             return True
-        if self.lchild and self.lchild.findTarget(k,hashmap):
-            return True
-        if self.rchild and self.rchild.findTarget(k,hashmap):
-            return True
+        hashmap[self.data] = k - self.data
+        if self.lchild:
+            if self.lchild.findTarget(k,hashmap):
+                return True
+        if self.rchild:
+            if self.rchild.findTarget(k,hashmap):
+                return True
         return False
             
         
