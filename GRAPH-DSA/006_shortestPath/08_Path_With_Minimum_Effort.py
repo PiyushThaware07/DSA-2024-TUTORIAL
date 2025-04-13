@@ -1,3 +1,12 @@
+'''
+🚩 Problem: Path with Minimum Effort
+
+You are given a 2D grid heights of size rows x cols, where heights[i][j] represents the height of the cell at position (i, j).
+A path is defined as a sequence of adjacent cells where each move is to one of the 4 neighboring cells (up, down, left, or right).
+The effort of a path is defined as the maximum absolute difference in heights between two consecutive cells along the path.
+Your task is to find a path from the top-left cell (0, 0) to the bottom-right cell (rows - 1, cols - 1) such that the effort of the path is minimized.
+'''
+
 class Solution:
     def minimumEffortPath(self, heights):
         rows = len(heights)
