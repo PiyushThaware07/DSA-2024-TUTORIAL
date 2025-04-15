@@ -57,6 +57,21 @@ class BST:
                 if current.rchild:
                     queue.append(current.rchild)
         levelorder(self)
+
+        print("\n\n5. Diagonal traversal")
+        def diagonal(node):
+            queue = [node]
+            result = []
+            while queue:
+                current = queue.pop(0)
+                while current:
+                    result.append(current.key)
+                    if current.lchild:
+                        queue.append(current.lchild)
+                    current = current.rchild
+            print(result)
+        diagonal(self)
+
     
 
     def getMinMaxNode(self):
@@ -110,13 +125,139 @@ class BST:
             print("Unbalanced")
         else:
             print("Balanced")
+
+    def views(self):
+        print("\n\n1. Left View")
+        def leftview(node):
+            queue = [node]
+            result = []
+            while queue:
+                levelSize = len(queue)
+                levelNode = []
+                for _ in range(levelSize):
+                    node = queue.pop(0)
+                    levelNode.append(node.key)
+                    if node.lchild:
+                        queue.append(node.lchild)
+                    if node.rchild:
+                        queue.append(node.rchild)
+                if levelNode:
+                    result.append(levelNode[0])
+            print(result)
+        leftview(self)
+
+        print("\n\n2. Right View")
+        def rightview(node):
+            queue = [node]
+            result = []
+            while queue:
+                levelSize = len(queue)
+                levelNode = []
+                for _ in range(levelSize):
+                    node = queue.pop(0)
+                    levelNode.append(node.key)
+                    if node.lchild:
+                        queue.append(node.lchild)
+                    if node.rchild:
+                        queue.append(node.rchild)
+                if levelNode:
+                    result.append(levelNode[-1])
+            print(result)
+        rightview(self)
+        
+        print("\n\n3. Top view")
+        def topview(node):
+            queue = [(node,0,0)]
+            result = {}
+            while queue:
+                levelSize = len(queue)
+                for _ in range(levelSize):
+                    node,hDist,vDist = queue.pop(0)
+                    if hDist not in result:
+                        result[hDist] = node.key
+                    if node.lchild:
+                        queue.append((node.lchild,hDist-1,vDist+1))
+                    if node.rchild:
+                        queue.append((node.rchild,hDist+1,vDist+1))
+            print([node for hDist,node in sorted(result.items())])
+        topview(self)
+
+        print("\n\n4. Bottom view")
+        def bottomview(node):
+            queue = [(node,0,0)]
+            result = {}
+            while queue:
+                levelSize = len(queue)
+                for _ in range(levelSize):
+                    node,hDist,vDist = queue.pop(0)
+                    result[hDist] = node.key
+                    if node.lchild:
+                        queue.append((node.lchild,hDist-1,vDist+1))
+                    if node.rchild:
+                        queue.append((node.rchild,hDist+1,vDist+1))
+            print([node for hDist,node in sorted(result.items())])
+        bottomview(self)
+    
+    def printAllPaths(self):
+        def helper(node,paths=[]):
+            paths.append(node.key)
+            if node.lchild is None and node.rchild is None:
+                print(" -> ".join(map(str, paths)))
+            if node.lchild:
+                helper(node.lchild,paths)
+            if node.rchild:
+                helper(node.rchild,paths)
+            paths.pop()
+        helper(self)
+    
+    def findAncestor(self,target,stack):
+        if self.key == target:
+            return True
+        stack.append(self.key)
+        if self.lchild:
+            if self.lchild.findAncestor(target,stack):
+                return True
+        if self.rchild:
+            if self.rchild.findAncestor(target,stack):
+                return True
+        stack.pop()
+        return False
+    
+    def printRootToNodePath(self,target):
+        def helper(node,path):
+            path.append(node.key)
+            if node.key == target:
+                return True
+            if node.lchild:
+                if helper(node.lchild,path):
+                    return True
+            if node.rchild:
+                if helper(node.rchild,path):
+                    return True
+            path.pop()
+            return False
+        path = []
+        helper(self,path)
+        print(path)
+
+    def TreeToArray(self):
+        nodeIndexing = {}
+        queue = [(self,0)]
+        while queue:
+            node ,index = queue.pop(0)
+            nodeIndexing[index] = node.key
+            if node.lchild:
+                queue.append((node.lchild,2*index+1))
+            if node.rchild:
+                queue.append((node.rchild,2*index+2))
+        print(nodeIndexing)
+
+
+
             
     
 root = BST(None)
-nums = [10,5,15,2,7,12,20,34,56,78]
+nums = [10,5,15,2,7,12,20]
 for num in nums:
     root.addNode(num)
-root.traversal()
-root.getMinMaxNode()
-root.getHeightofBSt()
-root.checkBalanced()
+root.TreeToArray()

@@ -46,18 +46,13 @@ class BT:
     (Means p and q are found in different subtrees, so self is their LCA.)
     '''
     def lowestCommonAncestor(self,p,q):
-        if self is None:
-            return None
-        if self.data == p or self.data == q:
+        if self == p or self == q:
             return self
-        left = self.lchild.lowestCommonAncestor(p,q) if self.lchild else None
-        right = self.rchild.lowestCommonAncestor(p,q) if self.rchild else None
-        if left is None:
-            return right
-        elif right is None:
-            return left
-        else:
+        left = self.lchild.lowestCommonAncestor(p, q) if self.lchild else None
+        right = self.rchild.lowestCommonAncestor(p, q) if self.rchild else None
+        if left and right:
             return self
+        return left or right
             
             
         
@@ -72,12 +67,24 @@ root.rchild.rchild = BT(5)
 root.rchild.rchild.lchild = BT(6)
 root.rchild.rchild.rchild = BT(7)
 
-lca = root.lowestCommonAncestor(7,8)
-print(lca.data)
-lca = root.lowestCommonAncestor(4,7)
-print(lca.data)
-lca = root.lowestCommonAncestor(2,3)
-print(lca.data)
-lca = root.lowestCommonAncestor(1,1)
-print(lca.data)
+# Assign references for LCA checks
+n7 = root.rchild.rchild.rchild
+n8 = root.rchild.lchild.lchild
+n4 = root.rchild.lchild
+n5 = root.rchild.rchild
+n2 = root.lchild
+n3 = root.rchild
+n1 = root
 
+# Find LCA
+lca = root.lowestCommonAncestor(n7, n8)
+print(lca.data)  # Output: 3
+
+lca = root.lowestCommonAncestor(n4, n7)
+print(lca.data)  # Output: 3
+
+lca = root.lowestCommonAncestor(n2, n3)
+print(lca.data)  # Output: 1
+
+lca = root.lowestCommonAncestor(n1, n1)
+print(lca.data)  # Output: 1

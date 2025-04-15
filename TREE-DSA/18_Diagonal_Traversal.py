@@ -10,12 +10,10 @@ class BST:
         result = []
         while queue:
             currentNode = queue.pop(0)
-            result.append(currentNode.key)
             while currentNode:
+                result.append(currentNode.key)
                 if currentNode.lchild is not None:
                     queue.append(currentNode.lchild)
-                if currentNode.rchild is not None:
-                    result.append(currentNode.rchild.key)
                 currentNode = currentNode.rchild
         print(result)
     

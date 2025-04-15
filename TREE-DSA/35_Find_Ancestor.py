@@ -6,18 +6,26 @@ class BT:
 
     def findAncestor(self, target, stack):
         if self.data == target:
-            return True 
+            return True
         stack.append(self.data)
-        # Search in left subtree
         if self.lchild:
-            if self.lchild.findAncestor(target, stack):
+            if self.lchild.findAncestor(target,stack):
                 return True
-        # Search in right subtree
         if self.rchild:
-            if self.rchild.findAncestor(target, stack):
+            if self.rchild.findAncestor(target,stack):
                 return True
-        stack.pop()  
+        stack.pop()
         return False
+    
+    def findLowestCommonAncestor(self,p,q):
+        if self.data == p or self.data == q:
+            return self
+        left = self.lchild.findLowestCommonAncestor(p,q) if self.lchild else None
+        right = self.rchild.findLowestCommonAncestor(p,q) if self.rchild else None
+        if left is not None and right is not None:
+            return self.data
+        return left or right
+        
 
 
 # Tree structure
@@ -31,6 +39,4 @@ root.rchild.rchild.lchild = BT(30)
 root.rchild.rchild.rchild = BT(40)
 
 # Find ancestors of 40
-stack = []
-root.findAncestor(40, stack)
-print(stack)
+print(root.findLowestCommonAncestor(5,40))
