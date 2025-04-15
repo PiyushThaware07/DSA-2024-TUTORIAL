@@ -9,7 +9,7 @@ Example 2 :
 Input: head = [7,7,7,7] val = 7
 Output: []
 '''
-from custom.linkedlist import LinkedList
+from custom.linkedlist import LinkedList,CreateNode
 class Solution:
     def RemoveElements(self,myList,val):
         head = myList.head
@@ -26,6 +26,20 @@ class Solution:
                 current = current.next
         myList.head = head
         myList.traversal()
+    
+    def optimize(self,myList,val):
+        dummy = CreateNode(-1)
+        dummy.next = myList.head
+        current = dummy
+        prev = None
+        while current is not None:
+            if current.data == val:
+                prev.next = current.next
+            else:
+                prev = current
+            current = current.next
+        myList.head = dummy.next
+        myList.traversal()
 
 
 myList = LinkedList()
@@ -39,3 +53,4 @@ myList.addEnd(6)
 
 sol = Solution()
 sol.RemoveElements(myList,6)
+sol.optimize(myList,6)
