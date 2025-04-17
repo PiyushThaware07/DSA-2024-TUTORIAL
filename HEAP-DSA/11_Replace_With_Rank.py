@@ -11,7 +11,7 @@ arr = [20, 15, 26, 2, 98, 6]
 
 import heapq
 class Solution:
-    def replaceWithRank(self, nums, N):
+    def brute(self, nums, N):
         # Step 1: Create a min heap from the input numbers
         minHeap = []
         for num in nums:
@@ -32,9 +32,33 @@ class Solution:
         # Step 4: Replace elements in original array with their rank
         result = [valueToRank[num] for num in nums]
         print(result)
+    
+    def optimize(self,nums,N):
+        minHeap = []
+        for num in nums:
+            heapq.heappush(minHeap,num)
+        
+        index = 1
+        indexing = {}
+        while minHeap:
+            ele = heapq.heappop(minHeap)
+            if ele not in indexing:  # handle dublicate elements
+                indexing[ele] = index
+                index += 1
+        
+        for i in range(N):
+            nums[i] = indexing[nums[i]]
+        print(nums)
+
 
 # Example usage
 sol = Solution()
-sol.replaceWithRank([20, 15, 26, 2, 98, 6], 6)
-sol.replaceWithRank([2, 2, 1, 6],4)
-sol.replaceWithRank([37,12,28,9,100,56,80,5,12],9)
+print("\n\nBrute Solution")
+sol.brute([20, 15, 26, 2, 98, 6], 6)
+sol.brute([2, 2, 1, 6],4)
+sol.brute([37,12,28,9,100,56,80,5,12],9)
+
+print("\n\nOptimize Solution")
+sol.optimize([20, 15, 26, 2, 98, 6], 6)
+sol.optimize([2, 2, 1, 6],4)
+sol.optimize([37,12,28,9,100,56,80,5,12],9)

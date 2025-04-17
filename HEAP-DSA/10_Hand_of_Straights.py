@@ -31,20 +31,16 @@ class Solution:
     5. If all elements are grouped correctly, return True
     """
     def brute(self,hand,groupSize):
-        hand.sort()
-        stack = []
         while hand:
+            bucket = []
             minElement = min(hand)
             for i in range(groupSize):
                 if minElement+i in hand:
-                    stack.append(minElement+i)
+                    bucket.append(minElement+i)
                     hand.remove(minElement + i)
                 else:
                     return False
-            if len(stack) == groupSize:
-                stack = []
-        else:
-            return True
+        return True
         
 
     def optimize(self,hands,groupSize):
