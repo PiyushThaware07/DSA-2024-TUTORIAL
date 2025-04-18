@@ -14,25 +14,21 @@ Example 2:
 
 
 class Solution:
-    def generateAllSubSets(self,nums,index,result,temp=None):
-        if temp is None:
-            temp = []
-        if index >= len(nums):
-            result.add(tuple(sorted(temp[:])))
-            return
-        # picking
-        temp.append(nums[index])
-        self.generateAllSubSets(nums,index+1,result,temp)
-        # not picking
-        temp.pop()
-        self.generateAllSubSets(nums,index+1,result,temp)
-        
-    
     def subSetSum(self,nums):
-        result = set()
-        self.generateAllSubSets(nums,0,result)
-        result = [list(item) for item in result] 
-        print(result)
+        self.result = set()
+        def helper(index,temp):
+            if index >= len(nums):
+                self.result.add(tuple(sorted(temp[:])))
+                return
+            # take
+            temp.append(nums[index])
+            helper(index+1,temp)
+            # not take
+            temp.pop()
+            helper(index+1,temp)
+        helper(0,[])
+        print([list(item) for item in self.result])
+
 
 sol = Solution()
 sol.subSetSum([1,2,2])

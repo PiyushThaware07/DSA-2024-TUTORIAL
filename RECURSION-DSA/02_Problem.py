@@ -11,7 +11,7 @@ print(reverseArray(nums,0,len(nums)-1))
 
 # ! Check the string is palindrome
 def palindrome(string,low,high):
-    if low >= high:
+    if low > high:
         return True
     if string[low] != string[high]:
         return False

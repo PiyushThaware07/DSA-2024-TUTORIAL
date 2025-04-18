@@ -1,4 +1,3 @@
-
 def findEqualToK(index,nums,totalSum,temp=None):
     if temp is None:
         temp = []

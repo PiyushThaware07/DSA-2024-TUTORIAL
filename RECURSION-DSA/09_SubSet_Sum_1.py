@@ -21,27 +21,23 @@ step-1 : generate all the subset or subseuqence of a given array.
 '''
 
 class Solution:
-    def generateAllSubSets(self,nums,index,result,temp=None):
-        if temp is None:
-            temp = []
-        if index >= len(nums):
-            calculate = sum(temp[:])
-            result.append(calculate)
-            return
-        # pick
-        temp.append(nums[index])
-        self.generateAllSubSets(nums,index+1,result,temp)
-        # not pick
-        temp.pop()
-        self.generateAllSubSets(nums,index+1,result,temp)
-        
-    
     def subSet(self,nums):
-        result = []
-        self.generateAllSubSets(nums,0,result)
-        result.sort()
-        print(result)
+        self.result = []
+        def helper(index,temp):
+            if index >= len(nums):
+                self.result.append(temp[:])
+                return
+            # take
+            temp.append(nums[index])
+            helper(index+1,temp)
+            # not take
+            temp.pop()
+            helper(index+1,temp)
+        helper(0,[])
+        print(self.result)
         
 
 sol = Solution()
 sol.subSet([2, 3])
+sol.subSet([1,2,3])
+sol.subSet([0])

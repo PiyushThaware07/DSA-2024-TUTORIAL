@@ -13,28 +13,26 @@ Example :
 '''
 
 class Solution:
-    def combinationSum(self, index, target, temp, nums, result):
-        # Base case: if target becomes 0, we found a valid combination
-        if target == 0:
-            result.append(temp[:])
-            return
-        
-        # Base case: if index goes out of bounds or target becomes negative
-        if index >= len(nums) or target < 0:
-            return
-        
-        # Picking (stay at the same index to allow multiple usage)
-        temp.append(nums[index])
-        self.combinationSum(index, target - nums[index], temp, nums, result)  # Stay at index
-        
-        # Not Picking
-        temp.pop()
-        self.combinationSum(index + 1, target, temp, nums, result)  # Move to the next index
+    def combinationSum(self,candidates,target):
+        self.result = []
+        def helper(index,currentSum,temp):
+            if currentSum == 0:
+                self.result.append(temp[:])
+                return 
+            if index >= len(candidates) or currentSum < 0:
+                return
+            # Picking (stay at the same index to allow multiple usage)
+            temp.append(candidates[index])
+            helper(index,currentSum-candidates[index],temp)
+            # not take Move to the next index
+            temp.pop()
+            helper(index+1,currentSum,temp)
+        helper(0,target,[])
+        print(self.result)
+
+
 
 # Example usage
-nums = [2, 3, 6, 7]
-target = 7
-result = []
 sol = Solution()
-sol.combinationSum(0, target, [], nums, result)
-print(result)
+sol.combinationSum([2, 3, 6, 7],7)
+sol.combinationSum([2,5,2,1,2],5)
