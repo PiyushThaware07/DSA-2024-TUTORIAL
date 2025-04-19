@@ -29,10 +29,13 @@ class Solution:
             if arr[i] == 0:
                 j = i
                 break
+        if j == -1:
+            return arr
         # start iteration from j
         for i in range(j+1,n):
             if arr[i] != 0:
                 self.swap(arr,i,j)
+        return arr
 
 
             
