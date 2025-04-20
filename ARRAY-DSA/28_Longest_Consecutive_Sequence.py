@@ -54,7 +54,7 @@ class Solution:
         if not arr:
             print(0)
             return
-        
+        arr.sort()
         n = len(arr)
         longest = 1
         count = 1
@@ -73,7 +73,7 @@ class Solution:
 
         
 numbers = [0,3,7,2,5,8,4,6,0,1]
-# numbers = [100,4,200,1,3,2]
+numbers = [100,4,200,1,3,2]
 numbers = [1,0,1,2]
 s = Solution()
 s.brute(numbers)

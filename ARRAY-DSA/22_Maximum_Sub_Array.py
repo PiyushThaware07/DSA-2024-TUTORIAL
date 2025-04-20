@@ -85,3 +85,24 @@ s = Solution()
 s.brute(numbers)
 s.better(numbers)
 s.optimal(numbers)
+
+
+
+
+
+def printMaximumSubArraySum(nums):
+    n = len(nums)
+    start,end = 0,0
+    currentSum = 0
+    maximumSum = nums[0]
+    for i in range(n):
+        currentSum += nums[i]
+        if currentSum > maximumSum:
+            maximumSum = currentSum
+            start = start
+            end = i
+        if currentSum < 0:
+            currentSum = 0
+            start = i+1
+    print(nums[start:end+1])
+printMaximumSubArraySum([-2,1,-3,4,-1,2,1,-5,4])

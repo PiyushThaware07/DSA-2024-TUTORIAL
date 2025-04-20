@@ -56,3 +56,22 @@ s = Solution()
 s.brute(numbers,3)
 s.optimal(numbers,3)
 s.optimal([1,2,3,1,1,1,1,2,3],3)
+
+
+
+# =================================================================
+# Note : Use this when array only have positive values 
+class Solution(object):
+    def subarraySum(self, nums, k):
+        n = len(nums)
+        l = 0
+        count = 0
+        currentSum = 0
+        for r in range(n):
+            currentSum += nums[r]
+            while currentSum > k and l <= r:
+                currentSum -= nums[l]
+                l += 1
+            if currentSum == k and l <= r:
+                count += 1
+        return count
