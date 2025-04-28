@@ -25,33 +25,32 @@ class BST:
         
     
     def isBalanced(self):
-        def findDepth(node):
+        def calculate_height(node):
             if node is None:
                 return 0
-            lh = findDepth(node.lchild)
-            if lh == -1:
+            lh = calculate_height(node.lchild)
+            rh = calculate_height(node.rchild)
+            if lh == -1 or rh == -1:
                 return -1
-            rh = findDepth(node.rchild)
-            if rh == -1:
+            if abs(lh-rh) > 1:
                 return -1
-            if abs(lh - rh) > 1:
-                return -1
-            return 1 + max(lh, rh)
-        if findDepth(self) == -1:
-            print("Unbalanced")
+            return 1 + max(lh,rh)
+        if calculate_height(self) == -1:
+            return False
         else:
-            print("Balanced")
+            return True
 
 
 
 
 
 root = BST(None)
-# nums = [10,5,7,15,20,17,25]
-nums = [1, 2, 3, 4, 5, 6,7]
+nums = [10,5,7,15,20,17,25]
+nums = [10,5,15,2,7,12,20]
+# nums = [1, 2, 3, 4, 5, 6,7]
 for num in nums:
     root.insert_node(num)
-root.isBalanced()
+print(root.isBalanced())
 
 
 

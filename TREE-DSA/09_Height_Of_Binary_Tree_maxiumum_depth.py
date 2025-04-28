@@ -20,32 +20,31 @@ class BST:
             else:
                 self.rchild = BST(data)
 
-    def levelOrder(self):     # Method - 01 : using level order traversal
-        queue = [self]
-        height = 0  # Root at level-1 so
-        while len(queue) != 0:
-            levelSize = len(queue)
+    def calculate_height(self):
+        def usingLevelOrder(node):
+            queue = [node]
+            height = 0
+            while queue:
+                levelSize = len(queue)
+                for _ in range(levelSize):
+                    current = queue.pop(0)
+                    if current.lchild:
+                        queue.append(current.lchild)
+                    if current.rchild:
+                        queue.append(current.rchild)
+                height += 1
+            return height
+        print("\n1. calculating height of binary tree using level order --> ",usingLevelOrder(self))
 
-            for _ in range(levelSize):
-                root = queue.pop(0)
 
-                if root.lchild is not None:
-                    queue.append(root.lchild)
-                
-                if root.rchild is not None:
-                    queue.append(root.rchild)
-            height += 1
-        return height
+        def usingRecursion(node):
+            if node is None:
+                return 0
+            lh = usingRecursion(node.lchild)
+            rh = usingRecursion(node.rchild)
+            return 1 + max(lh,rh)
+        print("\n2. calculating height of binary tree using recurssion --> ",usingRecursion(self))
         
-    
-    def maximum_depth(self):   # Method - 02 : using recursion
-        if self.val is None:
-            return 0
-        
-        leftHeight = self.lchild.maximum_depth() if self.lchild else 0
-        rightHeight = self.rchild.maximum_depth() if self.rchild else 0
-
-        return 1 + max(leftHeight,rightHeight)
 
 
 
@@ -55,5 +54,4 @@ root = BST(None)
 nums = [10,5,7,15,20,17,25]
 for num in nums:
     root.insert_node(num)
-print(root.levelOrder())
-print(root.maximum_depth())
+root.calculate_height()
